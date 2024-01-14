@@ -1,0 +1,36 @@
+*{
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
+}
+body{
+  background-color: rgba(249, 246, 246, 0.84);
+ 
+}
+.page{
+  width: 80%;
+  min-height: 100vh;
+  height: auto;
+  background-color:rgba(249, 246, 246, 0.84);
+  float: right;
+  padding-top: 10vh;
+}
+.displayFlex{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+.form-control:focus{
+  box-shadow: none;
+  border-color: orange;
+}
+.font-dotted{
+  font-family: 'Raleway Dots', sans-serif;
+}
+.introPage{
+  width: 100vw;
+  min-height: 100vh;
+  height: auto;
+  
+}

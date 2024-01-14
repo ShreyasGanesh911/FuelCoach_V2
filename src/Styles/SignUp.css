@@ -1,0 +1,49 @@
+.activeRadio{
+    border:2px solid orange;
+    
+}
+.gender-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.checkBox{
+    margin-left: 100px;
+    margin-right: 100px;
+    border-radius: 10px;
+}
+.male
+{
+    background-color: rgb(62, 176, 221);
+}
+.female{
+    background-color: rgb(148, 8, 148);
+}
+/* .radioCheck{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 50%;
+} */
+
+
+
+.card-input-element {
+    display: none;
+}
+
+.card-input {
+    margin: 10px;
+    padding: 00px;
+}
+
+.card-input:hover {
+    cursor: pointer;
+}
+
+.card-input-element:checked + .card-input {
+     box-shadow: 0 0 1px 1px #2ecc71;
+ }
+
