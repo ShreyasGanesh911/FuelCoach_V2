@@ -8,7 +8,7 @@ import Signup from './sections/Signup';
 import Profile from './sections/Profile';
 import OverView from './sections/OverView';
 import Blog from './sections/Blog';
-import Store from './sections/Store';
+
 import LogFood from './sections/LogFood';
 import Measurements from './sections/Measurements/Measurements';
 import Recipes from './sections/Recipes';
@@ -28,7 +28,6 @@ function App() {
           <Route path='OverView' element={<OverView/>}></Route>
           <Route path='profile' element={<Profile/>}></Route>
           <Route path='blogs' element={<Blog/>}></Route>
-          <Route path='Store' element={<Store/>}></Route>
           <Route path='measurements' element={<Measurements/>}></Route>
           <Route path='LogFood' element={<LogFood/>}></Route>
           <Route path='recipes' element={<Recipes/>}></Route>

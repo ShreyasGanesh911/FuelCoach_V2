@@ -4,7 +4,6 @@ import '../Styles/OverView.css'
 import OverViewCard from '../components/OverViewCard'
 import { CircularProgressbar,buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import quotes from '../quoteArray.js'
 import FoodTable from '../components/FoodTable';
 import { Link } from 'react-router-dom';
 import LineChart from '../components/LineChart';
