@@ -13,7 +13,6 @@ export default function SideBar() {
     {favicon:"fa-solid fa-ruler",tag:'Measurements',link:'/measurements'},
     {favicon:"fa-solid fa-bowl-food",tag:'Recipes',link:'/recipes'},
     {favicon:"fa-solid fa-newspaper",tag:'Blog',link:'/blogs'},
-    {favicon:"fa-solid fa-store",tag:'Store',link:'/store'},
     {favicon:"fa-solid fa-user",tag:'Profile',link:'/profile'},
     {favicon:"fa-solid fa-notes-medical",tag:'Health Log',link:'/profile'},
     {favicon:"fa-solid fa-question",tag:'About',link:'/profile'},

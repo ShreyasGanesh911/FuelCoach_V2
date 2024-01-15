@@ -11,8 +11,6 @@ export default function OverView() {
   type List = {
     name:string, data:string|number
   }
-  // const month= ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  // const date = new Date();
   type ProgressBar = {pathColor:string,trialColor:string}
   const lessPBar:ProgressBar = {pathColor:'red',trialColor:'red'}
   const highPBar:ProgressBar = {pathColor:'green',trialColor:'#f88'}
@@ -38,21 +36,11 @@ export default function OverView() {
       <CircularProgressbar value={cal} minValue={0} strokeWidth={4} styles={Math.round((cal/3000)*100)>=50?buildStyles(highPBar):buildStyles(lessPBar)} maxValue={3000}text={`${Math.round((cal/3000)*100)}%`} />
       <h5 className='text-warning text-center py-3'>{`${cal}/3000`}</h5>
     </div>
-    {/* <div className='text-black border px-3 py-5' style={{width:'250px'}}>
-      <h1 className="overflow-y-hidden">{date.getDate()}</h1> <h1 className="overflow-y-hidden">{month[date.getMonth()]}</h1>
-    </div> */}
+
     <div>
       
     </div>
       </div>
-      {/* <div className='text-warning' style={{display:'flex',flexFlow:'row-reverse',width:'85%'}}>
-      <h5>{`${cal}/3000`}</h5>
-      </div> */}
-
-      {/* <div className=' displayFlex border my-5 ' style={{width:"90%"}}>
-        <h5 className='text-black py-2'>{quotes[Math.floor(Math.random()*10)]}</h5>
-       
-      </div> */}
       <LineChart/>
     </div>
   )
