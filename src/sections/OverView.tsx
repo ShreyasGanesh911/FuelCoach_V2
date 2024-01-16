@@ -5,9 +5,12 @@ import OverViewCard from '../components/OverViewCard'
 import { CircularProgressbar,buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import FoodTable from '../components/FoodTable';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import LineChart from '../components/LineChart';
+import Auth from '../CustomHooks/Auth';
+
 export default function OverView() {
+  const navigate = useNavigate()
   type List = {
     name:string, data:string|number
   }
@@ -17,6 +20,8 @@ export default function OverView() {
   const myObj:List[] = [{name:'name',data:"joe Smith"},{name:"Calories ",data:3205},{name:'BMI',data:21.5},{name:'weight',data:'45kg'}]
   const [cal,setCal] = useState(0)
   useEffect(()=>{
+    if(!Auth())
+      navigate('/')
     setTimeout(()=>setCal(1500),500)
   })
   return (

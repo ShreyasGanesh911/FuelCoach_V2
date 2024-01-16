@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import BlogPost from '../components/BlogPost'
 import { Interface } from 'readline'
+import Auth from '../CustomHooks/Auth'
+import { useNavigate } from 'react-router-dom'
 type DataResponse = {
   author:string|null,
   content:string|null,
@@ -15,6 +17,7 @@ type DataResponse = {
 // const key:string = 'bdb6317eb5d844dd92ccd6c08ec5406f'
 // const key:string = 'aa449ccac9ea482787e132d90f0d6a01'
 export default function Blog() {
+  const navigate = useNavigate()
   // https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=aa449ccac9ea482787e132d90f0d6a01
   type News = {content:string,img:string,description:string,url:string}
   
@@ -38,6 +41,8 @@ export default function Blog() {
     }
   }
   useEffect(()=>{
+    if(!Auth())
+      navigate('/')
     fetchNews()
   })
   return (

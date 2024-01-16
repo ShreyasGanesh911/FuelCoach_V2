@@ -1,13 +1,20 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import FoodTable from '../components/FoodTable'
 import LogFoodModal from '../components/LogFoodModal'
-
+import Auth from '../CustomHooks/Auth'
+import { useNavigate } from 'react-router-dom'
 export default function LogFood() {
+  const navigate = useNavigate()
   const [show,setShow] = useState(false)
   const handleClick = ()=>{
     show?setShow(false):setShow(true)
     console.log(show)
+    
   }
+  useEffect(()=>{
+    if(!Auth())
+      navigate('/')
+  })
   return (
     <div className='page'>
       {show && <LogFoodModal setShow={setShow}/>}

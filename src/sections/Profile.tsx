@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import Auth from "../CustomHooks/Auth"
 
 export default function Profile() {
+  const navigate = useNavigate()
   const [edit,setEdit] =useState(false)
   type About = {name:string,email:string,phone:number,age:number,gender:string}
   const about:About = {name:'shreyas',email:'ShreyasIsNow@gmail.com',phone:9945333584,age:20,gender:'male'}
@@ -11,6 +13,10 @@ export default function Profile() {
     let name:string = e.target.name
     setInfo({...info,[name]:value})
   }
+  useEffect(()=>{
+    if(!Auth())
+      navigate('/')
+  })
   return (
     <div className='page'>
       <h2 className='py-2'>Profile</h2>
