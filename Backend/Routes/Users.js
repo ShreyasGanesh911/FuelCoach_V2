@@ -41,11 +41,14 @@ userRouter.get("/signup",async(req,res)=>{
 userRouter.post("/login",async(req,res)=>{
     try{
     const {Email,Password} = req.body;
+    console.log(Email,Password)
     const[result] = await pool.query("SELECT Password,User_ID FROM Users WHERE Email = ? ;",[Email])
     if(result.length){
+        //{expires: new Date(Date.now()+(90*60*1000)),httpOnly:true,sameSite:"none",secure:true}
         if(bcrypt.compareSync(Password,result[0].Password)){
-            res.cookie('Auth',result[0].User_ID,{expires: new Date(Date.now()+(90*60*1000))})
-            res.status(200).send({success:true,message:"logged in"})
+            res.cookie('AuthToken',result[0].User_ID,{httpOnly:true,sameSite:"none",secure:true})
+            console.log(result[0].User_ID)
+            res.status(200).send({success:true,message:"logged in",User_ID:result[0].User_ID})
         }
         else
         res.status(400).send({success:false,message:"Incorrect password"})
@@ -60,9 +63,10 @@ userRouter.post("/login",async(req,res)=>{
 
 
 userRouter.get('/about',auth,async(req,res)=>{
-    const token = req.cookies.Auth
+    const token = Number(req.cookies.AuthToken)
+    //console.log(`In About ${token}`)
     const [result] = await pool.query("SELECT Email,Phone,Name,BMI,BMR,Age,Height,Weight,Daily_Intake,Gender FROM Users u JOIN User_details ud ON u.User_ID = ud.User_ID WHERE u.User_ID=?;",[token])
-    res.send(result)
+    res.status(200).json({success:true,message:"Data sent",result:result})
     
 })
 module.exports = userRouter 

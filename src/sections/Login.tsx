@@ -1,6 +1,34 @@
-import { useState } from "react"
+import { useContext, useState } from "react"
 import '../App.css'
+import { useNavigate } from "react-router-dom"
+import { UserContext } from "../Context/userContext"
+
 export default function Login() {
+  const navigate = useNavigate()
+  const {user,setUser} = useContext(UserContext)
+  type Message={
+    success:boolean,
+    message:string,
+    User_ID:number
+  }
+  const loginNow = async()=>{
+    const responce = await fetch('http://localhost:4000/user/login',{
+      method:"POST",
+      credentials: 'include',
+      headers:{
+        "Content-Type": "application/json",
+        },
+      body: JSON.stringify({ Email:cred.email, Password:cred.password }),
+    })
+    const data:Message = await responce.json();
+    console.log(data)
+    if(data.success){
+      navigate('/overview')
+      localStorage.setItem("Auth",String(data.User_ID))
+      setUser(data.User_ID)
+    }
+
+  }
   const [cred,setCred]=useState({email:'',password:''})
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>):void=>{
     e.preventDefault()
@@ -10,6 +38,7 @@ export default function Login() {
   }
   const submitCred = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>):void=>{
     e.preventDefault()
+    loginNow()
     console.log(cred)
   }
   return (

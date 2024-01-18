@@ -13,9 +13,11 @@ import LogFood from './sections/LogFood';
 import Measurements from './sections/Measurements/Measurements';
 import Recipes from './sections/Recipes';
 import PageNotFound from './sections/PageNotFound';
+import UserState from './Context/userContext';
 
 function App() {
   return (
+    <UserState>
     <BrowserRouter>
     <Navbar/>
     
@@ -35,6 +37,7 @@ function App() {
         <Route path='*' element={<PageNotFound/>}></Route>
       </Routes>
     </BrowserRouter>
+    </UserState>
   );
 }
 
