@@ -47,7 +47,7 @@ export default function OverView() {
      // console.log(data.result[0])
      // console.log(data.result[0].Age)
       setGoal(data.result[0]?.Daily_Intake)
-      myObj.push({name:'Name',data:data.result[0].Name},{name:"Calories",data:data.result[0].Daily_Intake},{name:"BMI",data:data.result[0].BMI},{name:"Weight",data:data.result[0].Weight})
+      myObj.push({name:'Name',data:data.result[0].Name,key:"ABC"},{name:"Calories",data:data.result[0].Daily_Intake,key:"DEF"},{name:"BMI",data:data.result[0].BMI,key:"LMN"},{name:"Weight",data:data.result[0].Weight,key:"HIJ"})
 
       setUserDetails(myObj)
     }    
@@ -56,7 +56,7 @@ export default function OverView() {
   const {user,setUser} = useContext(UserContext)
   
   type List = {
-    name:string, data:string|number
+    name:string, data:string|number , key:string
   }
   type ProgressBar = {pathColor:string,trialColor:string}
   const lessPBar:ProgressBar = {pathColor:'red',trialColor:'red'}
@@ -76,8 +76,8 @@ export default function OverView() {
   return (
     <div className='page text-white'>
       <div className='displayFlex content my-5'>
-    {userDetails?.map(({name,data})=>{
-          return(<OverViewCard key={name} name={name} data={data}/>)
+    {userDetails?.map(({name,data,key})=>{
+          return(<OverViewCard key={key} name={name} data={data}/>)
         })}
       </div>
 
