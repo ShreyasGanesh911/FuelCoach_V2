@@ -10,20 +10,24 @@ type Props ={
   FoodHash:number,
   count:number
 }
-
+type Value ={
+  FoodHash:number,
+  Calories:number
+}
 export default function TableChild(props:Props) {
     const [confirm,setConfirm] = useState<boolean>(false)
     const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
         setConfirm(false)
-        console.log(e.currentTarget.value)
+        const tablevalue:Value = JSON.parse(e.currentTarget.value)
+        console.log(tablevalue.FoodHash,tablevalue.Calories)
         const responce = await fetch('http://localhost:4000/FoodLog/remove',{
           method:"POST",
           headers:{
             "Content-Type": "application/json",
           },
           credentials:"include",
-          body:JSON.stringify({FoodHash:e.currentTarget.value})
+          body:JSON.stringify({FoodHash:tablevalue.FoodHash,Calories:tablevalue.Calories})
         })
         const data = await responce.json()
         if(data.success)
@@ -45,7 +49,7 @@ export default function TableChild(props:Props) {
         <><button  className={`btn btn-dark px-5 ${!confirm?"visible":"visually-hidden"}`} onClick={()=>setConfirm(true)}><i className="fa-solid fa-delete-left fa-l"></i></button></>
         <>
           <button className={`btn btn-danger mx-2 ${confirm?"":"visually-hidden"}`} onClick={()=>setConfirm(false)}><i className="fa-regular fa-circle-xmark"></i></button>
-          <button className={`btn btn-success mx-2 text-center ${confirm?"":"visually-hidden"}`} value={props.FoodHash} onClick={handleClick}><i className="fa-solid fa-circle-check "></i></button>
+          <button className={`btn btn-success mx-2 text-center ${confirm?"":"visually-hidden"}`} value={JSON.stringify({FoodHash:props.FoodHash,Calories:props.Calories})} onClick={handleClick}><i className="fa-solid fa-circle-check "></i></button>
         </>
         
         </td> 

@@ -64,9 +64,33 @@ userRouter.post("/login",async(req,res)=>{
 
 userRouter.get('/about',auth,async(req,res)=>{
     const token = Number(req.cookies.AuthToken)
+    const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
     //console.log(`In About ${token}`)
-    const [result] = await pool.query("SELECT Email,Phone,Name,BMI,BMR,Age,Height,Weight,Daily_Intake,Gender FROM Users u JOIN User_details ud ON u.User_ID = ud.User_ID WHERE u.User_ID=?;",[token])
+    //const [result] = await pool.query("SELECT Name,BMI,BMR,Age,Height,Weight,Daily_Intake,Gender FROM Users u JOIN User_details ud ON u.User_ID=ud.User_ID WHERE u.User_ID=454578 ;",[token])
+    const [result] = await pool.query("SELECT Name,BMI,Age,Height,Weight,Daily_Intake,Gender FROM Users u,user_details ud WHERE u.User_ID = ud.User_ID AND u.User_ID = ?;",[token])
+    //console.log(result)
     res.status(200).json({success:true,message:"Data sent",result:result})
+    
+})
+
+userRouter.get('/completed',auth,async(req,res)=>{
+   try{
+    const User_ID = Number(req.cookies.AuthToken)
+    const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+    let [result] = await pool.query("SELECT Consumed , Goal FROM calorie_track WHERE User_ID = ? AND Date =?;",[User_ID,_date])
+    //console.log(result)
+    if(result.length && result[0].Consumed)
+     res.status(200).json({success:true,result:[{Consumed:result[0].Consumed,Goal:result[0].Goal}]})
+    else
+    {
+        [result] = await pool.query("SELECT Daily_Intake FROM user_details WHERE User_ID = ?;",[User_ID])
+        //console.log(result)
+        res.status(200).json({success:true,result:[{Consumed:0,Goal:result[0].Daily_Intake}]})
+    }
+   }catch(err){
+    res.status(200).json({success:true,Message:"Oops something went wrong"})
+   }
+    
     
 })
 module.exports = userRouter 

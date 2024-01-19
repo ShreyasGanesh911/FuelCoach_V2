@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 // import { MyToastSuccess,MyToastError, MyToastWarn } from './Toastbar'
-import { ToastContainer, toast } from 'react-toastify'
+import { ToastContainer} from 'react-toastify'
 import TableChild from './TableChild'
 type Result={
   Calories:number,
@@ -16,13 +16,10 @@ type Data = {
 }
 
 export default function FoodTable() {
-  const [table,setTable] = useState<Result[]>([])
-  const[cal,setCal] = useState<number>(0)
- 
-  let calo = 0
-  let count = 0
+  const [table,setTable] = useState<Result[]>([]) 
+  let calo = 0,count=0
   const getData = async()=>{
-    const responce = await fetch("http://localhost:4000/FoodLog/logged",{
+   const responce = await fetch("http://localhost:4000/FoodLog/logged",{
       method:"GET",
       headers:{
         "Content-Type": "application/json",
@@ -31,9 +28,7 @@ export default function FoodTable() {
     })
     const data:Data = await responce.json()
     setTable(data?.result)
-    //console.log(data.result[0].Calories)
   }
-
   useEffect(()=>{
     getData()
   },[getData])
@@ -57,12 +52,10 @@ export default function FoodTable() {
   </thead>
   <tbody>
     {table.map((e)=>{
-      // setCal(cal+e.Calories)
       calo+=e.Calories
       count++
       return(
-        <TableChild FoodName={e.FoodName} FoodHash={e.FoodHash} Tag={e.Tag} Qty={e.Qty} Calories={e.Calories} count={count} />
-      )
+        <TableChild FoodName={e.FoodName} FoodHash={e.FoodHash} Tag={e.Tag} Qty={e.Qty} Calories={e.Calories} count={count} />)
     })}
         <tr>
         <td colSpan={1}></td>

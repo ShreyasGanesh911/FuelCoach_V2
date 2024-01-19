@@ -50,8 +50,7 @@ export default function LogFoodModal({setShow}:Props) {
         console.log("no data")
         setShowtype(false)
         setResult(false)
-       }
-       
+       } 
        else{
         console.log(`IN ELSE ${res}`)
         setBaseCal(res.result[0].calories)
@@ -60,8 +59,7 @@ export default function LogFoodModal({setShow}:Props) {
         setArray(res.result)
         setShowtype(false)
         setResult(true)
-       }
-       
+       }   
     }
     const addFood = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
