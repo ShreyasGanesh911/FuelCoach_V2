@@ -40,3 +40,7 @@ overflow-y: hidden;
 .table-font{
   font-family: 'Roboto', sans-serif;
 }
+
+.font-regular{
+  font-family: 'Noto Serif', serif;
+}

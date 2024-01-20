@@ -84,18 +84,18 @@ export default function LogFoodModal({setShow}:Props) {
       <div className="border w-50 h-50 bg-light">
             <div className='d-flex' style={{flexDirection:'row-reverse'}}><button className='btn  mx-3 my-3' onClick={()=>setShow(false)}><i className="fa-solid fa-x"></i></button></div>
             <label htmlFor='searchFood ' className='w-100 displayFlex my-5'>
-                <input type="text" className='form-control w-50 mx-3' onChange={(e)=>setLog({...log,[e.target.name]:e.target.value})} name='FoodName' value={log.FoodName} />
+                <input type="text" className='form-control w-50 mx-3 table-font' onChange={(e)=>setLog({...log,[e.target.name]:e.target.value})} name='FoodName' value={log.FoodName} />
                 <button className='btn btn-warning mx-2' onClick={handleClick}>Search</button>
             </label>
-        {showType && <h2 className='text-center opacity-50'>Try typing something</h2>}
+        {showType && <h2 className='text-center opacity-50 py-3'>Try typing something</h2>}
         
         <section className='displayFlex my-3'style={{flexDirection:'column'}}>
         {result?(array?.map((e:Responce)=>{
             return(
-                <div className='w-75 border displayFlex my-2' style={{justifyContent:"space-evenly"}} key={e.fat_saturated_g}>
+                <div className='w-75 border displayFlex my-2 py-2' style={{justifyContent:"space-evenly"}} key={e.fat_saturated_g}>
                     <div className='w-25'>
-                    <h4>{e.name?.charAt(0).toUpperCase().concat(e.name?.slice(1)) }</h4>
-                    <h4>{(e.calories * log.Qty).toFixed(2)} cal</h4>
+                    <h4 className='table-font'>{e.name?.charAt(0).toUpperCase().concat(e.name?.slice(1)) }</h4>
+                    <h5 className='text-warning table-font'>{(e.calories * log.Qty).toFixed(2)} cal</h5>
                     </div>
                   
                     <div className=''>
@@ -106,9 +106,9 @@ export default function LogFoodModal({setShow}:Props) {
             <li className="page-item"><button className='btn btn-dark'onClick={()=>setLog({...log,Qty:log.Qty+1,Calories:(log.Qty+1)*baseCal})}>+</button></li>
             </ul>
                     </div>
-                    <input type="text" className='form-control w-25 text-center' name="Tag" value={log.Tag} placeholder='Add a tag' onChange={(e)=>setLog({...log,[e.target.name]:e.target.value})} required/>
+                    <input type="text" className='form-control w-25 text-center table-font' name="Tag" value={log.Tag} placeholder='Add a tag' onChange={(e)=>setLog({...log,[e.target.name]:e.target.value})} required/>
                     <div className=''>
-                        <button className='btn btn-warning' onClick={addFood}>Add</button>
+                        <button className='btn btn-warning table-font' onClick={addFood}>Add</button>
                     </div>
                     
                 </div>

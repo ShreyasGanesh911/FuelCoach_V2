@@ -35,8 +35,8 @@ export default function FoodTable() {
   return (
     <>{
       table.length===0?
-      <div className="bg-dark text-white border displayFlex" style={{height:"25vh"}}>
-        <h3 className='py-2'>No food logged for today</h3>
+      <div className="bg-dark text-white border displayFlex" style={{height:"30vh"}}>
+        <h3 className='py-2 table-font'>No food logged for today</h3>
       </div>
       :
     <table className="table table-dark">

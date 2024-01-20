@@ -46,10 +46,10 @@ export default function TableChild(props:Props) {
       <td>{props.Calories}</td>
      
        <td>
-        <><button  className={`btn btn-dark px-5 ${!confirm?"visible":"visually-hidden"}`} onClick={()=>setConfirm(true)}><i className="fa-solid fa-delete-left fa-l"></i></button></>
+        <><button  className={`btn btn-dark px-5 ${!confirm?"":"d-none"}`} onClick={()=>setConfirm(true)}><i className="fa-solid fa-delete-left fa-l"></i></button></>
         <>
-          <button className={`btn btn-danger mx-2 ${confirm?"":"visually-hidden"}`} onClick={()=>setConfirm(false)}><i className="fa-regular fa-circle-xmark"></i></button>
-          <button className={`btn btn-success mx-2 text-center ${confirm?"":"visually-hidden"}`} value={JSON.stringify({FoodHash:props.FoodHash,Calories:props.Calories})} onClick={handleClick}><i className="fa-solid fa-circle-check "></i></button>
+          <button className={`btn btn-danger ${confirm?"":"d-none"}`} onClick={()=>setConfirm(false)}><i className="fa-regular fa-circle-xmark"></i></button>
+          <button className={`btn btn-success mx-2 text-center ${confirm?"":"d-none"}`} value={JSON.stringify({FoodHash:props.FoodHash,Calories:props.Calories})} onClick={handleClick}><i className="fa-solid fa-circle-check "></i></button>
         </>
         
         </td> 

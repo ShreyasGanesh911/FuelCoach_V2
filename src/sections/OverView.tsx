@@ -67,13 +67,13 @@ export default function OverView() {
   })
   return (
     <div className='page text-white'>
-      <div className='displayFlex content my-5'>
+      <div className='displayFlex content my-3'>
     {userDetails?.map(({name,data,key})=>{
-          return(<OverViewCard key={key} name={name} data={data}/>)
+          return(<OverViewCard  key={key} name={name} data={data}/>)
         })}
       </div>
-      <div className='displayFlex'  style={{justifyContent:'space-between'}}>
-        <div className={`w-50 mx-5 `}  style={{height:'30vh',borderRadius:'5px'}}>
+      <div className='displayFlex my-2'  style={{justifyContent:'space-between'}}>
+        <div className='w-50 mx-5' style={{height:'30vh',borderRadius:'5px'}}>
           <Link to='/LogFood' className='nav-link'><FoodTable/></Link>         
         </div>
         <ProgressBar/>

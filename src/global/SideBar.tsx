@@ -29,7 +29,7 @@ const handleClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
 //React.MouseEvent<HTMLButtonElement, MouseEvent>
   return (
     <>
-<Sidebar id='side'  backgroundColor='#ffffff'  transitionDuration={800} collapsed={close} collapsedWidth='5vw' width='15vw' className='text-black position-fixed my-5' >
+<Sidebar id='side'  backgroundColor='#ffffff'  transitionDuration={800} collapsed={close} collapsedWidth='6vw' width='15vw' className='text-black position-fixed my-5' >
   <Menu id='sidebar' className='my-5 ' style={{}}>
     {menuitems.map(({favicon,tag,link})=>{
       return(
