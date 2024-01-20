@@ -6,23 +6,9 @@ import StepTwo from './SignUp/StepTwo'
 import StepFour from './SignUp/StepFour'
 import { MyToastError } from '../components/Toastbar'
 import { ToastContainer } from 'react-toastify'
+import StepFive from './SignUp/StepFive'
+import { FormLayout } from '../UserCred'
 
-type Form = {
-  Name:string,
-  Email:string,
-  Phone:number,
-  Password:string,
-  Gender:string,
-  Weight:number,
-  Height:number,
-  BMI:number,
-  BMR:number,
-  Age:number,
-  Daily_Intake:number,
-  Food_pref:number,
-  Activity_rate:number,
-  Goal:number
-}
 
 export default function Signup() {
   const checkCredentials = (num:number)=>{
@@ -46,9 +32,9 @@ export default function Signup() {
     }
     return true
   }
-  const userCred:Form = {Name:'',Email:'',Phone:0,Password:'',Gender:'',Weight:35,Height:180,BMI:0,BMR:0,Age:0,Daily_Intake:0,Food_pref:0,Activity_rate:0,Goal:0}
+  const userCred:FormLayout = {Name:'',Email:'',Phone:91,Password:'',Gender:'',Weight:35,Height:180,BMI:0,BMR:0,Age:0,Daily_Intake:0,Food_pref:0,Activity_rate:0,Goal:0,DOB:'',month:1,year:2000}
   const[step,setStep] = useState(1)
-  const[cred,setCred] = useState<Form>(userCred)
+  const[cred,setCred] = useState<FormLayout>(userCred)
   const handleNext = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
     const bool = checkCredentials(step)
@@ -63,18 +49,11 @@ export default function Signup() {
   return (
     <div className='introPage ' style={{display:'flex',justifyContent:'center',alignItems:'center',flexFlow:'column'}}>
       <div  className = 'gender-div w-75 displayFlex ' style={{display:'flex',justifyContent:'center',alignItems:'center',flexFlow:'column'}}>
-      {step===1 && <StepOne cred={cred} setCred={setCred}/> }
-      {step===2 && <StepTwo cred={cred} setCred={setCred} /> }
-      {step===3 && <StepThree cred={cred} setCred={setCred} /> }
-      {step===4 && <StepFour cred={cred} setCred={setCred} /> }
-      <div className='w-50 bg-white'style={{display:'flex',justifyContent:'space-evenly'}}>
-  
-    { step!==1 &&
-    <button className="btn btn-warning" onClick={handlePrev}>Prev</button>
-    }
-    {step!==4 &&
-      <button type='submit' className="btn btn-warning" onClick={handleNext}>Next</button>}
-      </div>
+      {step===1 && <StepOne cred={cred} setCred={setCred} step={step} setStep={setStep}/> }
+      {step===2 && <StepTwo cred={cred} setCred={setCred} step={step} setStep={setStep} /> }
+      {step===3 && <StepThree cred={cred} setCred={setCred} step={step} setStep={setStep}/> }
+      {step===4 && <StepFour cred={cred} setCred={setCred} step={step} setStep={setStep}/> }
+      {step===5 && <StepFive cred={cred} setCred={setCred} step={step} setStep={setStep}/> }
       </div>
       <ToastContainer/>
     </div>

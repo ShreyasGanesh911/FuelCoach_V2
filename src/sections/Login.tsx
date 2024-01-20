@@ -21,7 +21,7 @@ export default function Login() {
       body: JSON.stringify({ Email:cred.email, Password:cred.password }),
     })
     const data:Message = await responce.json();
-    console.log(data)
+   // console.log(data)
     if(data.success){
       navigate('/overview')
       localStorage.setItem("Auth",String(data.User_ID))

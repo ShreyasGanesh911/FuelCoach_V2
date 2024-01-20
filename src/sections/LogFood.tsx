@@ -8,7 +8,7 @@ export default function LogFood() {
   const [show,setShow] = useState(false)
   const handleClick = ()=>{
     show?setShow(false):setShow(true)
-    console.log(show)
+    //console.log(show)
     
   }
   useEffect(()=>{

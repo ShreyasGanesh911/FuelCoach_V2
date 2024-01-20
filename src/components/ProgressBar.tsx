@@ -28,7 +28,7 @@ export default function ProgressBar() {
         setValue(data.result)
     }
 
-    console.log(data)
+    //console.log(data)
   }
   useEffect(()=>{
     getData()

@@ -41,13 +41,13 @@ userRouter.get("/signup",async(req,res)=>{
 userRouter.post("/login",async(req,res)=>{
     try{
     const {Email,Password} = req.body;
-    console.log(Email,Password)
+    // console.log(Email,Password)
     const[result] = await pool.query("SELECT Password,User_ID FROM Users WHERE Email = ? ;",[Email])
     if(result.length){
         //{expires: new Date(Date.now()+(90*60*1000)),httpOnly:true,sameSite:"none",secure:true}
         if(bcrypt.compareSync(Password,result[0].Password)){
             res.cookie('AuthToken',result[0].User_ID,{httpOnly:true,sameSite:"none",secure:true})
-            console.log(result[0].User_ID)
+            // console.log(result[0].User_ID)
             res.status(200).send({success:true,message:"logged in",User_ID:result[0].User_ID})
         }
         else

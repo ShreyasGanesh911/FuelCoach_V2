@@ -1,11 +1,15 @@
 import { Dispatch, SetStateAction } from "react";
-import { FormLayout } from "../../UserCred";
+import { FormLayout,Props } from "../../UserCred";
 import "../../Styles/SignUp.css";
-type Props={
-  cred :FormLayout,
-  setCred:Dispatch<SetStateAction<FormLayout>>;
+type SelectOption = {
+  value:string,
+  tag:string
+
 }
-export default function StepFour({cred,setCred}:Props) {
+export default function StepFour({cred,setCred,step,setStep}:Props) {
+    const selectOption:SelectOption[] = [{value:'1.2',tag:"Sedentary: little or no exercise"},{value:'1.375',tag:"Light: exercise 1-3 times/week"},{value:'1.550',tag:"Moderate: exercise 3-5 times/week"}
+    ,{value:'1.725',tag:"Active: daily exercise or intense exercise 6-7 times/week"},{value:'1.990',tag:"Very Active: very intense exercise daily, or physical job"}
+  ]
     const handleChange = (e:React.ChangeEvent<HTMLSelectElement>)=>{
       setCred({...cred,Activity_rate:Number(e.target.value)})
       console.log(cred)
@@ -14,11 +18,33 @@ export default function StepFour({cred,setCred}:Props) {
       setCred({...cred,Goal:Number(e.target.value)})
       console.log(cred)
     }
+    const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+      e.preventDefault()
+      const BMI = Number(((cred.Weight/(cred.Height*cred.Height))*10000).toFixed(2))
+      console.log(BMI)
+      let BMR
+      if(cred.Gender==='M')
+         BMR = ((10*cred.Weight) + (6.25*cred.Height) - (5*cred.Age) + 5)
+      else
+          BMR = ((10*cred.Weight) + (6.25*cred.Height) - (5*cred.Age) - 161)
+      console.log(BMR)
+      let intake = Math.ceil(BMR * cred.Activity_rate)
+      switch(cred.Goal){
+        case 1: {intake-=250;break}
+        case 2: {intake+=250;break}
+        default: intake=intake
+      }
+      console.log(Math.ceil(intake))
+      setCred({...cred,BMI:BMI,Daily_Intake:intake,BMR:BMR})
+      setStep(step+1)
+          
+    }
     return (
     <>
-    <form className='w-50 border py-4 px-5 bg-white'style={{height:'60vh',borderRadius:'5%'}}>
-        <h2>What is your goal</h2>
-        <div className="displayFlex my-5"style={{flexDirection:'row',justifyContent:'space-evenly'}} >
+    <form className='border py-4 px-5 bg-white'style={{height:'60vh',borderRadius:'5%'}} onSubmit={handleSubmit}>
+      <section className="h-75 my-3">
+        <h4>What is your goal</h4>
+        <div className="displayFlex my-3"style={{flexDirection:'row',justifyContent:'space-evenly'}} >
     
     <div className="w-50  " > 
       <label className="w-100 " >
@@ -40,22 +66,7 @@ export default function StepFour({cred,setCred}:Props) {
     </div>
 
     </div>
-        {/* <form>
-            <div>
-            <label htmlFor="">Lose Weight</label>
-            <input type="radio" name='goal' value='Lose Weight'/>
-            </div>
-            <div>
-            <label htmlFor="">Gain Weight / Bulk </label>
-            <input type="radio" name='goal' value='Lose Weight'/>
-            </div>
-            <div>
-            <label htmlFor="">Maintaine Weight</label>
-            <input type="radio" name='goal' value='Lose Weight'/>
-            </div>
-            
-        </form> */}
-        <h2>How many times do you workout</h2>
+        <h4>How many times do you workout</h4>
         <select name="activity" className='form-select' value={cred.Activity_rate} onChange={handleChange}>
         <option value={1.2}>Sedentary: little or no exercise</option>
         <option value={1.375}>Light: exercise 1-3 times/week</option>
@@ -63,6 +74,11 @@ export default function StepFour({cred,setCred}:Props) {
         <option value={1.725}>Active: daily exercise or intense exercise 6-7 times/week</option>
         <option value={1.990}>Very Active: very intense exercise daily, or physical job</option>
     </select>
+    </section>
+    <div className="" style={{display:'flex',justifyContent:"space-between"}}>
+      <button className="btn btn-warning" onClick={(e)=>{ e.preventDefault();  setStep(step-1)}}>Prev</button>
+      <button className="btn btn-warning" >Submit</button>
+    </div>
       </form>
       
     </>

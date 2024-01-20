@@ -3,7 +3,7 @@ import { Link} from 'react-router-dom'
 export default function Navbar() {
   const[auth,setAuth]=useState(false)
   const getToken=():void=>{
-    const token = localStorage.getItem('authToken')
+    const token = localStorage.getItem('AuthToken')
     !token?setAuth(false):setAuth(true)
   }
   useEffect(()=>{
