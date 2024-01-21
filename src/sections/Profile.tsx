@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Auth from "../CustomHooks/Auth"
+import Cookies from 'universal-cookie'
 
 export default function Profile() {
+  const cookies = new Cookies()
   const navigate = useNavigate()
   const [edit,setEdit] =useState(false)
   type About = {name:string,email:string,phone:number,age:number,gender:string}
@@ -14,13 +16,13 @@ export default function Profile() {
     setInfo({...info,[name]:value})
   }
   useEffect(()=>{
-    if(!Auth())
-      navigate('/')
+    if(!cookies.get('MyAuth'))
+    navigate('/')
   })
   return (
     <div className='page'>
       <h2 className='py-2'>Profile</h2>
-      <div className='border' style={{height:'75vh',width:'90%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
+      <div className='border' style={{height:'auto',minHeight:'75vh',width:'90%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
       <div style={{height:'250px',width:'250px',borderRadius:'50%'}} className='bg-warning'></div>
       <div className='w-50 '>
             <h6 className="py-1">Name</h6>

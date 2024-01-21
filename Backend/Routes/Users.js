@@ -3,18 +3,7 @@ const userRouter = express.Router()
 const date = new Date()
 const auth = require("../Auth.js")
 const bcrypt = require('bcrypt');
-
-/*
-    Login
-    Signup
-    About user
-*/
-
 const pool = require('../Connection/Connect.js')
-userRouter.get("",async(req,res)=>{
-    const [result] = await pool.query("SELECT * FROM Users;")
-    res.json(result)
-})
 userRouter.post("/signup",async(req,res)=>{
     try{
         const {Name,Email,Phone,Password,DOB,Gender,BMI,BMR,Age,Height,Weight,Daily_Intake,Food_pref,Activity_rate,Goal} = req.body;
@@ -23,7 +12,7 @@ userRouter.post("/signup",async(req,res)=>{
         const bcPassword = bcrypt.hashSync(Password,10)
         const Join_date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
         await pool.query("INSERT INTO Users VALUES (?,?,?,?,?,?,?);",[User_ID,Name,Email,Number(Phone),bcPassword,Join_date,DOB])
-        res.cookie("Auth",User_ID)
+        //res.cookie("Auth",User_ID)
         await pool.query(`INSERT INTO User_details VALUES (${User_ID},'${Gender}',${BMI},${BMR},${Age},${Height},${Weight},${Daily_Intake},${Food_pref},${Activity_rate},${Goal});`)
         await pool.query(`INSERT INTO weight_log VALUES (?,?,?,?);`,[User_ID,weightHash,Join_date,Weight]) 
         res.status(200).json({success:true,message:"User created"})
@@ -76,6 +65,7 @@ userRouter.post('/checkUserExists',async(req,res)=>{
     }
 })
 userRouter.get('/about',auth,async(req,res)=>{
+   try{
     const token = Number(req.cookies.AuthToken)
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
     //console.log(`In About ${token}`)
@@ -83,6 +73,9 @@ userRouter.get('/about',auth,async(req,res)=>{
     const [result] = await pool.query("SELECT Name,BMI,Age,Height,Weight,Daily_Intake,Gender FROM Users u,user_details ud WHERE u.User_ID = ud.User_ID AND u.User_ID = ?;",[token])
     //console.log(result)
     res.status(200).json({success:true,message:"Data sent",result:result})
+   }catch(err){
+    res.status(500).json({success:false,message:"Internal server error"})
+   }
     
 })
 

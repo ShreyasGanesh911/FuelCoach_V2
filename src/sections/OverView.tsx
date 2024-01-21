@@ -8,8 +8,10 @@ import LineChart from '../components/LineChart';
 import Auth from '../CustomHooks/Auth';
 import ProgressBar from '../components/ProgressBar';
 import LogWeightModal from '../components/LogWeightModal';
+import Cookies from 'universal-cookie';
 
 export default function OverView() {
+  const cookies = new Cookies()
   const navigate = useNavigate()
   type Result = {
     Age:number,
@@ -55,9 +57,10 @@ export default function OverView() {
   const myObj:List[] = []
   const[userDetails,setUserDetails] = useState<List[]>()
   useEffect(()=>{
+    if(!cookies.get('MyAuth'))
+    navigate('/')
     getDetails()
-    if(!Auth())
-      navigate('/')
+   
   })
   return (
     <div className='page '>

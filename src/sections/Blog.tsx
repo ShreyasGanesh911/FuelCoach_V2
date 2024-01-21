@@ -3,6 +3,7 @@ import BlogPost from '../components/BlogPost'
 import Auth from '../CustomHooks/Auth'
 import HashLoader from "react-spinners/HashLoader"
 import { useNavigate } from 'react-router-dom'
+import Cookies from 'universal-cookie'
 type DataResponse = {
   author:string|null,
   content:string|null,
@@ -22,6 +23,7 @@ const override: CSSProperties = {
 // const key:string = 'bdb6317eb5d844dd92ccd6c08ec5406f'
 // const key:string = 'aa449ccac9ea482787e132d90f0d6a01'
 export default function Blog() {
+  const cookies = new Cookies()
   let [loading, setLoading] = useState(true);
   const navigate = useNavigate()
   // https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=aa449ccac9ea482787e132d90f0d6a01 
@@ -47,9 +49,11 @@ export default function Blog() {
     }
   }
   useEffect(()=>{
-    if(!Auth())
-      navigate('/')
+    if(!cookies.get('MyAuth'))
+    navigate('/')
     fetchNews()
+    
+    
   },[])
   return (
     <div className='page'>

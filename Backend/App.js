@@ -18,7 +18,10 @@ app.use('/weight',weightRoute)
 app.use('/calories',calorieRoute)
 app.use('/FoodLog',foodRoute)
 
-
+app.get('/clear',(req,res)=>{
+  res.clearCookie('AuthToken')
+  res.status(200).json({success:true})
+})
 app.listen(port, () => {
   console.log("Active");
 });

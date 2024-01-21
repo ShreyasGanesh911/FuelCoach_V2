@@ -8,27 +8,6 @@ import { ToastContainer } from 'react-toastify'
 import StepFive from './SignUp/StepFive'
 import { FormLayout } from '../UserCred'
 export default function Signup() {
-  // const checkCredentials = (num:number)=>{
-  //   switch(num){
-  //     case 1 :{
-  //       if(cred.Name===""){
-  //          MyToastError("Name can't be empty")
-  //          return false
-  //       }
-        
-  //       else if(cred.Email==="" )
-  //       return MyToastError("Email can't be empty")
-  //       else if(cred.Password==="")
-  //       return MyToastError("Password can't be empty")
-  //       else if(cred.Password.length<=8)
-  //       return MyToastError("Password must be atleast 8 characters long")
-  //       else if(cred.Phone.toString().length!==10)
-  //       return MyToastError("Invalid phone number")
-        
-  //     }
-  //   }
-  //   return true
-  // }
   const userCred:FormLayout = {Name:'',Email:'',Phone:91,Password:'',Gender:'',Weight:35,Height:180,BMI:0,BMR:0,Age:0,Daily_Intake:0,Food_pref:0,Activity_rate:0,Goal:0,DOB:'',month:1,year:2000}
   const[step,setStep] = useState(1)
   const[cred,setCred] = useState<FormLayout>(userCred)

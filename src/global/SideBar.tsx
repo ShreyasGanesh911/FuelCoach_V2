@@ -4,10 +4,15 @@ import { Sidebar, Menu, MenuItem} from 'react-pro-sidebar';
 import {NavLink,Outlet, useNavigate} from 'react-router-dom';
 
 import '../Styles/Sidebar.css'
+import Cookies from 'universal-cookie';
 export default function SideBar() {
+  const cookie = new Cookies()
   const navigate = useNavigate()
-const handleClick = (e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
   e.preventDefault()
+  cookie.remove('MyAuth', { path: '/' })
+  const responce = await fetch('http://localhost:4000/clear',{credentials:'include'})
+  
   localStorage.removeItem('Auth')
   navigate('/')
 }

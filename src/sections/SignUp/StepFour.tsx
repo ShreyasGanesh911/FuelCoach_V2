@@ -32,7 +32,7 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
     }
     return (
     <>
-    <form className='border py-4 px-5 bg-white'style={{height:'60vh',borderRadius:'5%'}} onSubmit={handleSubmit}>
+    <form className='border py-4 px-5 bg-white form-body' onSubmit={handleSubmit}>
       <section className="h-75 my-3">
         <h4>What is your goal</h4>
         <div className="displayFlex my-3"style={{flexDirection:'row',justifyContent:'space-evenly'}} >
@@ -57,8 +57,8 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
     </div>
 
     </div>
-        <h4>How many times do you workout</h4>
-        <select name="activity" className='form-select' value={cred.Activity_rate} onChange={handleChange}>
+        <h4 className="font-monospace my-3">How many times do you workout</h4>
+        <select name="activity" className='form-select table-font' value={cred.Activity_rate} onChange={handleChange}>
         <option value={1.2}>Sedentary: little or no exercise</option>
         <option value={1.375}>Light: exercise 1-3 times/week</option>
         <option value={1.550}>Moderate: exercise 3-5 times/week</option>

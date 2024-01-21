@@ -1,9 +1,14 @@
-import { useContext, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import '../App.css'
 import { useNavigate } from "react-router-dom"
 import { UserContext } from "../Context/userContext"
+import { MyToastError } from "../components/Toastbar"
+import { ToastContainer } from "react-toastify"
+import Auth from "../CustomHooks/Auth"
+import Cookies from "universal-cookie"
 
 export default function Login() {
+  const cookie = new Cookies()
   const navigate = useNavigate()
   const {user,setUser} = useContext(UserContext)
   type Message={
@@ -25,7 +30,11 @@ export default function Login() {
     if(data.success){
       navigate('/overview')
       localStorage.setItem("Auth",String(data.User_ID))
+      cookie.set('MyAuth',cred.email,{ path: '/' })
       setUser(data.User_ID)
+    }
+    else{
+      MyToastError(data.message)
     }
 
   }
@@ -41,6 +50,11 @@ export default function Login() {
     loginNow()
     console.log(cred)
   }
+  useEffect(()=>{
+    const token = cookie.get('MyAuth')
+    if(token)
+      navigate('/overview')
+  })
   return (
     <div className='introPage 'style={{display:'flex',justifyContent:'center',alignItems:'center',flexFlow:'column'}}>
       <div className="w-25  text-center">
@@ -57,6 +71,7 @@ export default function Login() {
   </div>
   <button type="submit" className="btn btn-warning" onClick={submitCred}>Login</button>
 </form>
+<ToastContainer/>
     </div>
   )
 }
