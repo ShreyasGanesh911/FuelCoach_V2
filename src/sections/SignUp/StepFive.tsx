@@ -1,12 +1,35 @@
 //import { useState } from 'react'
+import { useEffect, useState } from "react";
 import {Props} from "../../UserCred";
-
+import { FormLayout } from "../../UserCred";
 import 'react-calendar/dist/Calendar.css';
 import { Link } from 'react-router-dom';
 
-
+type Data = {
+  success:boolean,
+  message:string
+}
 export default function StepFive({cred}:Props) {
+  const [coomplete,setComplete] = useState<boolean>(false)
+  const SignUser =async()=>{
+    const responce = await fetch('http://localhost:4000/user/signup',{
+      method:'POST',
+      headers:{
+        "Content-Type": "application/json",
+      },
+      credentials:'include',
+      body:JSON.stringify(cred)
+    })
+    const data:Data = await responce.json()
+    if(data.success)
+      console.log(data.message)
+    else
+      console.log(data.message)
+  }
     console.log(cred)
+    useEffect(()=>{
+      SignUser()
+    })
   return (
   <>
     <form className=' border py-4 px-5 bg-white form-body'>

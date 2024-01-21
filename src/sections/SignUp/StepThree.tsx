@@ -4,7 +4,7 @@ export default function StepThree({cred,setCred,step,setStep}:Props) {
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     const name = e.target.name
     const value = e.target.value
-    setCred({...cred,[name]:value})
+    setCred({...cred,[name]:Number(value)})
   }
   return (
     <>

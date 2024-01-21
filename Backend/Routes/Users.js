@@ -15,26 +15,21 @@ userRouter.get("",async(req,res)=>{
     const [result] = await pool.query("SELECT * FROM Users;")
     res.json(result)
 })
-userRouter.get("/signup",async(req,res)=>{
+userRouter.post("/signup",async(req,res)=>{
     try{
-        const {Name,Email,Phone,Password,Gender,BMI,BMR,Age,Height,Weight,Daily_Intake,Food_pref,Activity_rate} = req.body;
+        const {Name,Email,Phone,Password,DOB,Gender,BMI,BMR,Age,Height,Weight,Daily_Intake,Food_pref,Activity_rate,Goal} = req.body;
         const User_ID = Math.floor(Math.random()*1000000)
         const weightHash = Math.floor(Math.random()*1000000)
         const bcPassword = bcrypt.hashSync(Password,10)
         const Join_date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
-        await pool.query("INSERT INTO Users VALUES (?,?,?,?,?,?);",[User_ID,Name,Email,Phone,bcPassword,Join_date])
+        await pool.query("INSERT INTO Users VALUES (?,?,?,?,?,?,?);",[User_ID,Name,Email,Number(Phone),bcPassword,Join_date,DOB])
         res.cookie("Auth",User_ID)
-        await pool.query(`INSERT INTO User_details VALUES (${User_ID},'${Gender}',${BMI},${BMR},${Age},${Height},${Weight},${Daily_Intake},${Food_pref},${Activity_rate});`)
+        await pool.query(`INSERT INTO User_details VALUES (${User_ID},'${Gender}',${BMI},${BMR},${Age},${Height},${Weight},${Daily_Intake},${Food_pref},${Activity_rate},${Goal});`)
         await pool.query(`INSERT INTO weight_log VALUES (?,?,?,?);`,[User_ID,weightHash,Join_date,Weight]) 
-        res.status(200).send({success:true,message:"User created"})
+        res.status(200).json({success:true,message:"User created"})
 
-    }catch(err){
-            if(err.message.toLowerCase().includes("email"))
-            res.status(400).send({message:"Email used",err:err})
-            else if(err.message.toLowerCase().includes("phone"))
-            res.status(400).send({message:"Phone used",err:err})
-            else
-            res.status(400).send({message:"oops something went wrong",err:err})
+    }catch(err){  
+            res.status(400).json({success:false,message:err})
     }
 })
 
@@ -61,7 +56,25 @@ userRouter.post("/login",async(req,res)=>{
     
 })
 
+userRouter.post('/checkUserExists',async(req,res)=>{
+    try{
+        const {Email,Phone} = req.body
+        console.log(Phone)
+        let [result] = await pool.query(`SELECT User_ID FROM Users WHERE Email = ? ;`,[Email])
+        console.log(result)
+        if(result.length)
+            return res.status(200).json({success:false,message:"Looks like the user exists, try another Email ID"})
+        const [result2] = await pool.query(`SELECT User_ID FROM Users WHERE Phone = ? ;`,[Number(Phone)])
+        console.log(result2)
+        if(result2.length)
+            return res.status(200).json({success:false,message:"Looks like the user exists, try another Phone number"})
 
+            res.status(200).json({success:true,message:"Good to go!"})
+
+    }catch(err){
+        res.status(500).json({success:false,message:"Internal server error"})
+    }
+})
 userRouter.get('/about',auth,async(req,res)=>{
     const token = Number(req.cookies.AuthToken)
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`

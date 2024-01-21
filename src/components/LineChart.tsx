@@ -28,7 +28,7 @@ export default function LineChart() {
   },[])
   return (
     <div className='w-50 ' style={{marginBottom:'10vh',height:'30vh'}}>
-      <Line style={{width:'40%'}}  options={{scales:{y:{min:Math.max(...dataSet.map((e)=>e.Weight))-10,max:Math.max(...dataSet.map((e)=>e.Weight))+10}}}}
+      <Line style={{width:'40%'}}  options={{scales:{y:{min:Math.min(...dataSet.map((e)=>e.Weight))-10,max:Math.max(...dataSet.map((e)=>e.Weight))+10}}}}
       data={{labels:dataSet?.map((e)=>e.Month),datasets:[{label:"Weight",data:dataSet?.map((e)=>e.Weight),backgroundColor:['red'],borderColor:'pink',tension:0.2,fill:false,pointRadius:5}]}}/> 
     </div>
   )

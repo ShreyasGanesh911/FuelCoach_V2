@@ -28,7 +28,7 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
       console.log(Math.ceil(intake))
       setCred({...cred,BMI:BMI,Daily_Intake:intake,BMR:BMR})
       setStep(step+1)
-          
+        
     }
     return (
     <>

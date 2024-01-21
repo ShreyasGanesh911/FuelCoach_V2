@@ -1,13 +1,39 @@
 import {useState} from "react";
 import {Form,Props} from "../../UserCred";
 import "../../Styles/SignUp.css";
-
+import { MyToastError } from "../../components/Toastbar";
+type Data = {
+  success:boolean,
+  message:string
+}
 export default function StepOne({cred,setCred,step,setStep}:Props) {
-  const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
+  const checkUser = async()=>{
+    const responce = await fetch('http://localhost:4000/user/checkUserExists',{
+      method:'POST',
+      headers:{
+        "Content-Type": "application/json",
+      },
+      credentials:'include',
+      body:JSON.stringify({Email:cred.Email,Phone:Number(cred.Phone)})
+    })
+    const data:Data = await responce.json()
+    if(data.success)
+      return true
+    else{
+      MyToastError(data.message)
+      return false
+    }
+      
+  }
+  const handleSubmit = async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
     // check if all fields are filled
-    // check i fthe number / email has been used
-    setStep(step+1)
+    // check if the number / email has been used
+    if(await checkUser())
+      setStep(step+1)
+    
+    
+    
   }
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     const name = e.target.name
