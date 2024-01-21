@@ -33,9 +33,9 @@ export default function ProgressBar() {
   })
   return (
     <>
-            <div className='my-5' style={{width:'250px'}}>
+            <div className='' style={{width:'250px'}}>
       <CircularProgressbar value={value[0].Consumed} minValue={0}  strokeWidth={5} styles={Math.round((value[0].Consumed/value[0].Goal)*100)>=50?buildStyles(highPBar):buildStyles(lessPBar)} maxValue={value[0].Goal}text={`${Math.round((value[0].Consumed/value[0].Goal)*100)}%`} />
-      <h5 className='text-warning text-center py-3 table-font'>{`${value[0].Consumed}/${value[0].Goal}`}</h5>
+      <h5 className='text-warning text-center py-1 table-font'>{`${value[0].Consumed}/${value[0].Goal}`}</h5>
     </div>
     </>
   )

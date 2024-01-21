@@ -65,12 +65,12 @@ export default function OverView() {
   return (
     <div className='page '>
       {show && <LogWeightModal setShow={setShow} show={show}/>}
-      <div className='displayFlex content my-3'>
+      <div className='displayFlex content my-4'>
     {userDetails?.map(({name,data,key})=>{
           return(<OverViewCard  key={key} name={name} data={data}/>)
         })}
       </div>
-      <div className='displayFlex my-2'  style={{justifyContent:'space-between'}}>
+      <div className='displayFlex'  style={{justifyContent:'space-between',marginTop:'5vh',marginBottom:'5vh'}}>
         <div className='w-50 mx-5' style={{height:'30vh',borderRadius:'5px'}}>
           <Link to='/LogFood' className='nav-link'><FoodTable/></Link>         
         </div>
