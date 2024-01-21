@@ -21,7 +21,7 @@ const handleChangeForRadio =(e:React.ChangeEvent<HTMLInputElement>)=>{
 }
 const handleSubmit = (e:React.FormEvent<HTMLFormElement>)=>{
   e.preventDefault()
-  setCred({...cred,Age:d.getFullYear()-Number(userdate.year),DOB:`${userdate.year}-0${userdate.month}-01`})
+  setCred({...cred,Age:d.getFullYear()-Number(cred.year),DOB:`${cred.year}-0${cred.month}-01`})
   console.log(cred)
   setStep(step+1)
 }

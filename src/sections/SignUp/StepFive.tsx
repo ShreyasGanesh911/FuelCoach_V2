@@ -35,7 +35,7 @@ export default function StepFive({cred}:Props) {
     console.log(cred)
     useEffect(()=>{
       SignUser()
-    })
+    },[])
   return (
   <>
     <form className=' border py-4 px-5 bg-white form-body'>

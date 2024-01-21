@@ -8,19 +8,23 @@ userRouter.post("/signup",async(req,res)=>{
     try{
         const {Name,Email,Phone,Password,DOB,Gender,BMI,BMR,Age,Height,Weight,Daily_Intake,Food_pref,Activity_rate,Goal} = req.body;
         const User_ID = Math.floor(Math.random()*1000000)
+        console.log(User_ID)
         const weightHash = Math.floor(Math.random()*1000000)
         const bcPassword = bcrypt.hashSync(Password,10)
         const Join_date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
         await pool.query("INSERT INTO Users VALUES (?,?,?,?,?,?,?);",[User_ID,Name,Email,Number(Phone),bcPassword,Join_date,DOB])
         //res.cookie("Auth",User_ID)
-        await pool.query(`INSERT INTO User_details VALUES (${User_ID},'${Gender}',${BMI},${BMR},${Age},${Height},${Weight},${Daily_Intake},${Food_pref},${Activity_rate},${Goal});`)
+        await pool.query(`INSERT INTO User_details VALUES (${User_ID},'${Gender}',${BMI},${Math.floor(BMR)},${Number(Age)},${Number(Height)},${Number(Weight)},${Daily_Intake},${Food_pref},${Activity_rate},${Goal});`)
         await pool.query(`INSERT INTO weight_log VALUES (?,?,?,?);`,[User_ID,weightHash,Join_date,Weight]) 
+        console.log("Reg success")
         res.status(200).json({success:true,message:"User created"})
 
     }catch(err){  
+            console.log(err)
             res.status(400).json({success:false,message:err})
+            
     }
-})
+})      
 
 userRouter.post("/login",async(req,res)=>{
     try{
@@ -48,18 +52,13 @@ userRouter.post("/login",async(req,res)=>{
 userRouter.post('/checkUserExists',async(req,res)=>{
     try{
         const {Email,Phone} = req.body
-        console.log(Phone)
         let [result] = await pool.query(`SELECT User_ID FROM Users WHERE Email = ? ;`,[Email])
-        console.log(result)
         if(result.length)
             return res.status(200).json({success:false,message:"Looks like the user exists, try another Email ID"})
         const [result2] = await pool.query(`SELECT User_ID FROM Users WHERE Phone = ? ;`,[Number(Phone)])
-        console.log(result2)
         if(result2.length)
             return res.status(200).json({success:false,message:"Looks like the user exists, try another Phone number"})
-
-            res.status(200).json({success:true,message:"Good to go!"})
-
+        res.status(200).json({success:true,message:"Good to go!"})
     }catch(err){
         res.status(500).json({success:false,message:"Internal server error"})
     }
