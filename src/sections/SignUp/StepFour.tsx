@@ -68,7 +68,7 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
     </section>
     <div className="" style={{display:'flex',justifyContent:"space-between"}}>
       <button className="btn btn-warning" onClick={(e)=>{ e.preventDefault();  setStep(step-1)}}>Prev</button>
-      <button className="btn btn-warning" >Submit</button>
+      <button className="btn btn-warning" >Next</button>
     </div>
       </form>
       
