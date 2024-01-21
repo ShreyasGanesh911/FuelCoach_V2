@@ -1,6 +1,5 @@
-import { Dispatch, SetStateAction,useState } from "react";
-import { FormLayout,Props } from "../../UserCred";
-import Calendar from 'react-calendar';
+import {useState } from "react";
+import {Props} from "../../UserCred";
 import "../../Styles/SignUp.css";
 
 
@@ -10,17 +9,13 @@ export default function StepTwo({cred,setCred,step,setStep}:Props) {
     year:number
   }
    const dob:DOB = {month:1,year:2000}
-
      const d = new Date()
-
-// const [date,setdate] = useState(`${d.getDate()}-${d.getMonth()+1}-${d.getFullYear()}`)
 const [userdate,setUserDate] = useState<DOB>(dob)
 const handleDateChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   setCred({...cred,[e.target.name]:e.target.value})
 
 }
 const handleChangeForRadio =(e:React.ChangeEvent<HTMLInputElement>)=>{
-  const name = e.target.name
   const value = Number(e.target.value)
   setCred({...cred,Food_pref:value})
 }

@@ -2,3 +2,10 @@
     justify-content: space-around;
     color: black;
 }
+
+.line-cover{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}

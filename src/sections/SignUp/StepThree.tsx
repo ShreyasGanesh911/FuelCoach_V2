@@ -1,15 +1,10 @@
-import { useState } from "react"
-
-import { Dispatch, SetStateAction } from "react";
-import { FormLayout,Props } from "../../UserCred";
+import {Props } from "../../UserCred";
 import "../../Styles/SignUp.css";
 export default function StepThree({cred,setCred,step,setStep}:Props) {
-  const [bmi,setBmi] = useState<number>(0)
   const handleOnChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
     const name = e.target.name
     const value = e.target.value
     setCred({...cred,[name]:value})
-    setBmi(cred.Weight/(cred.Height*cred.Height)*10000)
   }
   return (
     <>

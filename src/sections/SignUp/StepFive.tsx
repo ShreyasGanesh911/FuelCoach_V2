@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
-import { FormLayout,Props } from "../../UserCred";
-import Calendar,{} from 'react-calendar';
-import dayjs from 'dayjs';
+//import { useState } from 'react'
+import {Props} from "../../UserCred";
+
 import 'react-calendar/dist/Calendar.css';
 import { Link } from 'react-router-dom';
 
 
-export default function StepFive({cred,setCred,step,setStep}:Props) {
+export default function StepFive({cred}:Props) {
     console.log(cred)
   return (
   <>

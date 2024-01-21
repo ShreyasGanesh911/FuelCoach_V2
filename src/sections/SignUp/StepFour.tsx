@@ -1,15 +1,6 @@
-import { Dispatch, SetStateAction } from "react";
-import { FormLayout,Props } from "../../UserCred";
+import {Props} from "../../UserCred";
 import "../../Styles/SignUp.css";
-type SelectOption = {
-  value:string,
-  tag:string
-
-}
 export default function StepFour({cred,setCred,step,setStep}:Props) {
-    const selectOption:SelectOption[] = [{value:'1.2',tag:"Sedentary: little or no exercise"},{value:'1.375',tag:"Light: exercise 1-3 times/week"},{value:'1.550',tag:"Moderate: exercise 3-5 times/week"}
-    ,{value:'1.725',tag:"Active: daily exercise or intense exercise 6-7 times/week"},{value:'1.990',tag:"Very Active: very intense exercise daily, or physical job"}
-  ]
     const handleChange = (e:React.ChangeEvent<HTMLSelectElement>)=>{
       setCred({...cred,Activity_rate:Number(e.target.value)})
       console.log(cred)
@@ -32,7 +23,7 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
       switch(cred.Goal){
         case 1: {intake-=250;break}
         case 2: {intake+=250;break}
-        default: intake=intake
+        default: intake+=0
       }
       console.log(Math.ceil(intake))
       setCred({...cred,BMI:BMI,Daily_Intake:intake,BMR:BMR})

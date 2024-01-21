@@ -1,5 +1,5 @@
-import { Dispatch, SetStateAction, useState } from "react";
-import { FormLayout,Form,Props } from "../../UserCred";
+import {useState} from "react";
+import {Form,Props} from "../../UserCred";
 import "../../Styles/SignUp.css";
 
 export default function StepOne({cred,setCred,step,setStep}:Props) {

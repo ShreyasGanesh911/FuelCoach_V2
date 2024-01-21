@@ -6,7 +6,7 @@ const date = new Date()
 // Push weight to DB , but if it exists dont add, instead update
 weightRoute.post('/add',auth,async(req,res)=>{
     try{
-    const User_ID = req.cookies.Auth
+    const User_ID = req.cookies.AuthToken
     const {Weight} = req.body
     const weightHash = Math.floor(Math.random()*1000000)
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
@@ -23,8 +23,13 @@ weightRoute.post('/add',auth,async(req,res)=>{
 })
 // get users 6 latest weights
 weightRoute.get('/getAllWeightLogs',auth,async(req,res)=>{
-    const User_ID = req.cookies.Auth
-    const [result] = await pool.query("SELECT Weight,Date FROM weight_log WHERE User_ID = ? ORDER BY Date LIMIT 6;",[User_ID])
-    res.send(result)
+    try{
+        const User_ID = Number(req.cookies.AuthToken)
+        const [result] = await pool.query(`SELECT Weight,CONCAT(day(Date)," ",monthname(Date)) AS Month FROM weight_log WHERE User_ID = ? ORDER BY Date LIMIT 6;`,[User_ID])
+        res.status(200).json({success:true,result:result})  
+    }catch(err){
+        res.status(500).json({success:false,result:{message:"internal server error"}})  
+    }
+    
 })
 module.exports = weightRoute

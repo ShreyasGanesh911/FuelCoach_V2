@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState,CSSProperties } from 'react'
 import BlogPost from '../components/BlogPost'
-import { Interface } from 'readline'
 import Auth from '../CustomHooks/Auth'
+import HashLoader from "react-spinners/HashLoader"
 import { useNavigate } from 'react-router-dom'
 type DataResponse = {
   author:string|null,
@@ -14,13 +14,17 @@ type DataResponse = {
   urlToImage:string,
 
 }
+const override: CSSProperties = {
+  display: "block",
+  margin: "0 auto",
+  borderColor: "red",
+};
 // const key:string = 'bdb6317eb5d844dd92ccd6c08ec5406f'
 // const key:string = 'aa449ccac9ea482787e132d90f0d6a01'
 export default function Blog() {
+  let [loading, setLoading] = useState(true);
   const navigate = useNavigate()
-  // https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=aa449ccac9ea482787e132d90f0d6a01
-  type News = {content:string,img:string,description:string,url:string}
-  
+  // https://newsapi.org/v2/top-headlines?country=in&category=health&apiKey=aa449ccac9ea482787e132d90f0d6a01 
   //https://newsapi.org/v2/top-headlines?category=health&apiKey=bdb6317eb5d844dd92ccd6c08ec5406f
   const [blog,setBlog] = useState([])
   const [view,setView] = useState(true)
@@ -31,9 +35,11 @@ export default function Blog() {
     const json = await data.json();
     if(json.status!=='ok'){
       setView(false)
+      setLoading(false)
     }
     else{
     console.log(json.articles)
+    setLoading(false)
    setBlog(json.articles)
     }
     }catch(e){
@@ -44,10 +50,12 @@ export default function Blog() {
     if(!Auth())
       navigate('/')
     fetchNews()
-  })
+  },[])
   return (
     <div className='page'>
       <h2 className='overflow-y-hidden py-2'>Blogs</h2>
+      {loading?<div className='w-100 displayFlex' style={{height:"60vh"}}><HashLoader color='#ffc107' loading={loading} cssOverride={override} size={80} aria-label="Loading Spinner" data-testid="loader"/></div>:
+     <>
      {
       view?(
       blog.map((e:DataResponse)=>{
@@ -58,27 +66,8 @@ export default function Blog() {
       :
       <>There was an Error fetching </>
     } 
+    </>
+}
     </div>
   )
 }
-// author: 
-// 
-// content: 
-//description
-// : 
-
-// publishedAt
-// : 
-
-// source
-// : 
-// {id: null, name: 'Livemint'}
-// title
-// : 
-// "Plant-based compound cytisine may help people to quit smoking - Mint Lounge"
-// url
-// : 
-// "https://lifestyle.livemint.com/health/wellness/plantbased-compound-cytisine-quit-smoking-nicotine-replacement-therapy-111704098445656.html"
-// urlToImage
-// : 
-// "https://images.livemint.com/img/2024/01/01/1140x641/oc-gonzalez-nOVWrtav4Mw-unsplash_1704103062122_1704103114103.jpg"

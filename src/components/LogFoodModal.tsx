@@ -1,9 +1,10 @@
-import React, { useState, Dispatch,SetStateAction, useEffect } from 'react';
+import React, { useState, Dispatch,SetStateAction, useEffect,CSSProperties } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import  "../Styles/LogFood.css"
 import getdata from '../CustomHooks/getFoodData';
 import {MyToastSuccess,MyToastWarn} from "../components/Toastbar"
+import HashLoader from "react-spinners/HashLoader"
 type Props = {
     setShow: Dispatch<SetStateAction<boolean>>;
 }
@@ -31,7 +32,14 @@ interface Data{
     success:boolean,
     result:Responce[]
 }
+const override: CSSProperties = {
+    display: "block",
+    margin: "0 auto",
+    borderColor: "red",
+  };
 export default function LogFoodModal({setShow}:Props) {
+    let [loading, setLoading] = useState(false);
+  let [color, setColor] = useState("#ffc107");
      let userFood:Food={
         Calories:0,Tag:"",FoodName:"",Qty:1
      }
@@ -45,11 +53,14 @@ export default function LogFoodModal({setShow}:Props) {
         if(log.FoodName===''){
             return MyToastWarn("Can't leave it empty")
         }
+        setShowtype(false)
+        setLoading(true)
        const res:Data = await getdata(`1  ${log.FoodName}`)
        if(!res.success){
         console.log("no data")
-        setShowtype(false)
+        
         setResult(false)
+        setLoading(false)
        } 
        else{
         console.log(`IN ELSE ${res}`)
@@ -57,8 +68,8 @@ export default function LogFoodModal({setShow}:Props) {
         setLog({...log,Calories:res.result[0].calories})
         res.result.length=1
         setArray(res.result)
-        setShowtype(false)
         setResult(true)
+        setLoading(false)
        }   
     }
     const addFood = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
@@ -88,7 +99,7 @@ export default function LogFoodModal({setShow}:Props) {
                 <button className='btn btn-warning mx-2' onClick={handleClick}>Search</button>
             </label>
         {showType && <h2 className='text-center opacity-50 py-3'>Try typing something</h2>}
-        
+        {loading?  <HashLoader color={color} loading={loading} cssOverride={override} size={80} aria-label="Loading Spinner" data-testid="loader"/>:
         <section className='displayFlex my-3'style={{flexDirection:'column'}}>
         {result?(array?.map((e:Responce)=>{
             return(
@@ -116,6 +127,7 @@ export default function LogFoodModal({setShow}:Props) {
             )
         })):<h2 className='text-center opacity-50'>No data found</h2>}
         </section>
+}
 
       </div>
       <ToastContainer />
