@@ -63,7 +63,7 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
         <option value={1.375}>Light: exercise 1-3 times/week</option>
         <option value={1.550}>Moderate: exercise 3-5 times/week</option>
         <option value={1.725}>Active: daily exercise or intense exercise 6-7 times/week</option>
-        <option value={1.990}>Very Active: very intense exercise daily, or physical job</option>
+        <option value={1.900}>Very Active: very intense exercise daily, or physical job</option>
     </select>
     </section>
     <div className="" style={{display:'flex',justifyContent:"space-between"}}>
