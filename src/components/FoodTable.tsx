@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 // import { MyToastSuccess,MyToastError, MyToastWarn } from './Toastbar'
 import { ToastContainer} from 'react-toastify'
 import TableChild from './TableChild'
+import Cookies from 'universal-cookie'
+import { useNavigate } from 'react-router-dom'
 type Result={
   Calories:number,
   date:string,
@@ -16,6 +18,8 @@ type Data = {
 }
 
 export default function FoodTable() {
+  const navigate = useNavigate()
+  const cookie = new Cookies()
   const [table,setTable] = useState<Result[]>([]) 
   let calo = 0,count=0
   const getData = async()=>{
@@ -27,6 +31,10 @@ export default function FoodTable() {
       credentials: 'include',
     })
     const data:Data = await responce.json()
+    if(!data.status){
+      cookie.remove('MyAuth')
+      navigate('/')
+    }
     setTable(data?.result)
   }
   useEffect(()=>{

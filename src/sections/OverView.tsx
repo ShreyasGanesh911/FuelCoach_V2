@@ -41,6 +41,7 @@ export default function OverView() {
     })
     const data:FetchedData = await responce.json()
     if(!data.success){
+      cookies.remove('MyAuth')
       localStorage.removeItem("Auth")
       navigate('/') 
     }
