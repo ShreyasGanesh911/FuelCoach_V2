@@ -47,6 +47,7 @@ export default function FoodTable() {
         <h3 className='py-2 table-font'>No food logged for today</h3>
       </div>
       :
+      <div className='bg-dark displayFlex' style={{minHeight:'30vh',height:'auto',alignItems:'flex-start'}}>
     <table className="table table-dark">
   <thead>
     <tr>
@@ -74,6 +75,7 @@ export default function FoodTable() {
   </tbody>
   <ToastContainer/>
 </table>
+</div>
 }
 </>
   )

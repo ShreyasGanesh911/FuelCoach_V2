@@ -32,7 +32,7 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
     }
     return (
     <>
-    <form className='border py-4 px-5 bg-white form-body' onSubmit={handleSubmit}>
+    <form className='border py-4 px-5 bg-white form-body font-regular' onSubmit={handleSubmit}>
       <section className="h-75 my-3">
         <h4>What is your goal</h4>
         <div className="displayFlex my-3"style={{flexDirection:'row',justifyContent:'space-evenly'}} >
@@ -40,25 +40,25 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
     <div className="w-50  " > 
       <label className="w-100 " >
         <input type="radio" name="product" value={1} className="card-input-element" onChange={handleChangeForRadio} />
-          <h5 className={`card-input py-3 font-monospace text-center bg-light border ${cred.Goal===1?'border-warning':''}`}>Lose Weight</h5>
+          <h5 className={`card-input py-3  text-center bg-light border ${cred.Goal===1?'border-warning':''}`}>Lose Weight</h5>
       </label>
     </div>
     <div className="w-50  " > 
       <label className="w-100 " >
         <input type="radio" name="product" className="card-input-element" value={2} onChange={handleChangeForRadio} />
-          <h5 className={`card-input py-3 font-monospace text-center bg-light border ${cred.Goal===2?'border-warning':''}`}>Gain Weight</h5>
+          <h5 className={`card-input py-3  text-center bg-light border ${cred.Goal===2?'border-warning':''}`}>Gain Weight</h5>
       </label>
     </div>
     <div className="w-50  " > 
       <label className="w-100 " >
         <input type="radio" name="product" className="card-input-element" value={3} onChange={handleChangeForRadio} />
-          <h5 className={`card-input py-3 font-monospace text-center bg-light border ${cred.Goal===3?'border-warning':''}`}>Maintaine Weight</h5>
+          <h5 className={`card-input py-3  text-center bg-light border ${cred.Goal===3?'border-warning':''}`}>Maintaine Weight</h5>
       </label>
     </div>
 
     </div>
-        <h4 className="font-monospace my-3">How many times do you workout</h4>
-        <select name="activity" className='form-select table-font' value={cred.Activity_rate} onChange={handleChange}>
+        <h4 className=" my-3">How many times do you workout</h4>
+        <select name="activity" className='form-select font-regular my-5' value={cred.Activity_rate} onChange={handleChange}>
         <option value={1.2}>Sedentary: little or no exercise</option>
         <option value={1.375}>Light: exercise 1-3 times/week</option>
         <option value={1.550}>Moderate: exercise 3-5 times/week</option>
@@ -66,8 +66,8 @@ export default function StepFour({cred,setCred,step,setStep}:Props) {
         <option value={1.900}>Very Active: very intense exercise daily, or physical job</option>
     </select>
     </section>
-    <div className="" style={{display:'flex',justifyContent:"space-between"}}>
-      <button className="btn btn-warning" onClick={(e)=>{ e.preventDefault();  setStep(step-1)}}>Prev</button>
+    <div className="font-regular" style={{display:'flex',justifyContent:"space-between"}}>
+      <button className="btn btn-warning font-regular" onClick={(e)=>{ e.preventDefault();  setStep(step-1)}}>Prev</button>
       <button className="btn btn-warning" >Next</button>
     </div>
       </form>

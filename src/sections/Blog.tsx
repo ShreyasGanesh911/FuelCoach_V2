@@ -40,7 +40,6 @@ export default function Blog() {
       setLoading(false)
     }
     else{
-    console.log(json.articles)
     setLoading(false)
    setBlog(json.articles)
     }
@@ -64,7 +63,7 @@ export default function Blog() {
       view?(
       blog.map((e:DataResponse)=>{
         return(
-          <BlogPost title={e.title} description={e.description} img={e.urlToImage} newsUrl={e.url}/>
+          <BlogPost title={e.title} description={e.description} img={e.urlToImage} key={e.url} newsUrl={e.url}/>
         )
       }))
       :

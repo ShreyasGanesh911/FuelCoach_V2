@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom"
 import { UserContext } from "../Context/userContext"
 import { MyToastError } from "../components/Toastbar"
 import { ToastContainer } from "react-toastify"
-import Auth from "../CustomHooks/Auth"
 import Cookies from "universal-cookie"
 
 export default function Login() {
@@ -26,7 +25,6 @@ export default function Login() {
       body: JSON.stringify({ Email:cred.email, Password:cred.password }),
     })
     const data:Message = await responce.json();
-   // console.log(data)
     if(data.success){
       navigate('/overview')
       localStorage.setItem("Auth",String(data.User_ID))
@@ -61,14 +59,14 @@ export default function Login() {
         <h1 className="py-2"> <i className="fa-solid fa-charging-station fs-2 overflow-y-hidden mx-2 text-warning"></i>Fuel Coach</h1>
       </div>
       <form className="w-25  px-2 py-2">
-  <div className="mb-3">
-    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-    <input type="email" name='email' value={cred.email} className="form-control" id="exampleInputEmail1" onChange={handleOnChange}  aria-describedby="emailHelp"/>
-  </div>
-  <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-    <input type="password" name='password' minLength={8} value={cred.password} className="form-control"  onChange={handleOnChange} id="exampleInputPassword1"/>
-  </div>
+  <div className="form-floating mb-3">
+  <input type="email" className="form-control" id="floatingInput" name='email' value={cred.email} onChange={handleOnChange}/>
+  <label htmlFor="floatingInput">Email address</label>
+</div>
+  <div className="form-floating mb-3">
+  <input type="password" name='password' minLength={8} value={cred.password} className="form-control"  onChange={handleOnChange}/>
+  <label htmlFor="floatingInput">Password</label>
+</div>
   <button type="submit" className="btn btn-warning" onClick={submitCred}>Login</button>
 </form>
 <ToastContainer/>

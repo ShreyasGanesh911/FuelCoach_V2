@@ -32,24 +32,24 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
 }
   return (
     <>
-      <form className='border py-4 px-5 bg-white text-black form-body' onSubmit={handleSubmit} >
+      <form className='border py-4 px-5 bg-white text-black form-body font-regular' onSubmit={handleSubmit} >
         <section className="h-75 my-3">
-        <h4 className="font-monospace ">Select your gender</h4>
+        <h4 className="font-regular">Select your gender</h4>
       <div className="displayFlex my-2"style={{flexDirection:'row',justifyContent:'space-evenly'}}>
     <div className="w-50  " > 
       <label className="w-100 " >
         <input type="radio" name="Gender"  className="card-input-element" onChange={handleChange} value="M" />
-          <h5 className={`card-input py-3 font-monospace text-center bg-light border ${cred.Gender==='M'?'border-warning':''}`}>Male</h5>
+          <h5 className={`card-input py-3  text-center bg-light border ${cred.Gender==='M'?'border-warning':''}`}>Male</h5>
       </label>
     </div>
     <div className="w-50 " > 
       <label className="w-100 " >
         <input type="radio" name="Gender" className="card-input-element" onChange={handleChange} value="F" />
-          <h5 className={`card-input py-3 font-monospace border text-center bg-light ${cred.Gender==='F'?'border-warning':''}`}>Female</h5>
+          <h5 className={`card-input py-3  border text-center bg-light ${cred.Gender==='F'?'border-warning':''}`}>Female</h5>
       </label>
     </div>
     </div>
-    <h4 className="font-monospace ">What is your date of birth</h4>
+    <h4 className=" ">What is your date of birth</h4>
     <section className="displayFlex" style={{display:'felx' , justifyContent:'space-evenly'}}>
     <div className="w-25">
       <label htmlFor="">Month</label>
@@ -60,19 +60,19 @@ const handleChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
       <input type='number' className="form-control" name='year' min={1950} value={cred.year} onChange={handleDateChange} max={d.getFullYear()-18} required/>    
     </div>
     </section>
-    <h4 className="font-monospace my-2">Food Preferencer</h4>
+    <h4 className=" my-2">Food Preferencer</h4>
     <section className="displayFlex my-1"style={{flexDirection:'row',justifyContent:'space-evenly'}}>
      
       <div className="w-50  " > 
       <label className="w-100 " >
         <input type="radio" name="Food_pref" value={1} className="card-input-element" onChange={handleChangeForRadio} />
-          <h5 className={`card-input py-3 font-monospace text-center bg-light border ${cred.Food_pref===1?'border-warning':''}`}>Vegetarian</h5>
+          <h5 className={`card-input py-3  text-center bg-light border ${cred.Food_pref===1?'border-warning':''}`}>Vegetarian</h5>
       </label>
     </div>
       <div className="w-50  " > 
       <label className="w-100 " >
         <input type="radio" name="Food_pref" value={2} className="card-input-element" onChange={handleChangeForRadio} />
-          <h5 className={`card-input py-3 font-monospace text-center bg-light border ${cred.Food_pref===2?'border-warning':''}`}>Eegetarian</h5>
+          <h5 className={`card-input py-3  text-center bg-light border ${cred.Food_pref===2?'border-warning':''}`}>Eegetarian</h5>
       </label>
     </div>
     <div className="w-50  " > 

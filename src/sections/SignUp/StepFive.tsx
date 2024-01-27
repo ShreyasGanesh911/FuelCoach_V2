@@ -41,16 +41,16 @@ export default function StepFive({cred}:Props) {
     console.log(cred)
   return (
   <>
-    <form className=' border py-4 px-5 bg-white form-body' onSubmit={handleSubmit}>
+    <form className=' border py-4 px-5 bg-white form-body font-regular' onSubmit={handleSubmit}>
       {loading?<div className='w-100 displayFlex' style={{height:"60vh"}}><HashLoader color='#ffc107' loading={loading} cssOverride={override} size={80} aria-label="Loading Spinner" data-testid="loader"/></div>:
         <>
-        <h3 className='my-2 py-1 font-monospace'>Hey {cred.Name.charAt(0).toUpperCase().concat(cred.Name.slice(1))}</h3>
-    <section className="h-75 displayFlex my-5 table-font" style={{flexDirection:"column"}}>
+        <h3 className='my-2 py-1 '>Hey {cred.Name.charAt(0).toUpperCase().concat(cred.Name.slice(1))}</h3>
+    <section className="h-75 displayFlex my-5 " style={{flexDirection:"column"}}>
         <h1 className=''><i className="fa-regular fa-circle-check overflow-hidden" style={{fontSize:'120px',color:'green'}}></i></h1>
         <h4 className='py-1 '>Your account is almost completed</h4>
         <h5 className='py-1'>Please login to fuel Coach</h5>
        
-         <button className='btn btn-warning'>Get Started</button>
+         <button className='btn btn-warning font-regular'>Get Started</button>
     </section>
         </>
       
