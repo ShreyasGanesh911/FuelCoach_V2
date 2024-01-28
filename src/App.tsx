@@ -8,12 +8,11 @@ import Signup from './sections/Signup';
 import Profile from './sections/Profile';
 import OverView from './sections/OverView';
 import Blog from './sections/Blog';
-
 import LogFood from './sections/LogFood';
-import Measurements from './sections/Measurements/Measurements';
 import Recipes from './sections/Recipes';
 import PageNotFound from './sections/PageNotFound';
 import UserState from './Context/userContext';
+import About from './sections/About';
 
 function App() {
   return (
@@ -30,8 +29,8 @@ function App() {
           <Route path='OverView' element={<OverView/>}></Route>
           <Route path='profile' element={<Profile/>}></Route>
           <Route path='blogs' element={<Blog/>}></Route>
-          <Route path='measurements' element={<Measurements/>}></Route>
           <Route path='LogFood' element={<LogFood/>}></Route>
+          <Route path='about' element={<About/>}></Route>
           <Route path='recipes' element={<Recipes/>}></Route>
         </Route>
         <Route path='*' element={<PageNotFound/>}></Route>

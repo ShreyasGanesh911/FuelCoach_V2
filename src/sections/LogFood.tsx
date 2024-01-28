@@ -20,7 +20,7 @@ export default function LogFood() {
   return (
     <div className='page'>
       {show && <LogFoodModal setShow={setShow}/>}
-      <h2 className='overflow-y-hidden py-2'>Food Log</h2>
+      <h2 className='overflow-y-hidden py-2 font-regular'>Log Food</h2>
       <div className='w-75 my-5'>
         <FoodTable/>
       </div>

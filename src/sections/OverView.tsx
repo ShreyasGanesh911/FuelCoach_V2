@@ -68,7 +68,7 @@ export default function OverView() {
       {show && <LogWeightModal setShow={setShow} show={show}/>}
       <div className='displayFlex content my-4'>
     {userDetails?.map(({name,data,key})=>{
-          return(<OverViewCard  key={key} name={name} data={data}/>)
+          return(<OverViewCard  key={name+key} name={name} data={data}/>)
         })}
       </div>
       <div className='displayFlex'  style={{justifyContent:'space-between',marginTop:'5vh',marginBottom:'5vh'}}>
@@ -83,7 +83,7 @@ export default function OverView() {
       <LineChart/>
       <div className='w-25 py-5 mx-5 overflow-y-hidden border rounded-2  displayFlex'>
         <h3 className='table-font text-center'>Add weight</h3>
-        <button className='btn btn-warning mx-3 ' onClick={()=>setShow(true)} style={{borderRadius:"50%"}}><i className="fa-solid fa-plus"></i></button>
+        <button className='btn btn-warning mx-3 ' onClick={()=>setShow(true)} style={{borderRadius:"50%"}}>+</button>
       </div>
       </section>
 

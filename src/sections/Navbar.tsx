@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Link} from 'react-router-dom'
+import Cookies from 'universal-cookie'
 export default function Navbar() {
+  const cookies = new Cookies()
   const[auth,setAuth]=useState(false)
   const getToken=():void=>{
-    const token = localStorage.getItem('AuthToken')
+    const token = cookies.get('MyAuth')
     !token?setAuth(false):setAuth(true)
   }
   useEffect(()=>{
@@ -21,7 +23,9 @@ export default function Navbar() {
     </div>
     {auth?
       <ul className='navbar-nav mx-3'>
-      <Link to='/profile'><li className="nav-item bg-warning "style={{width:'50px',height:'50px',borderRadius:'50%'}}> </li></Link>
+      <Link to='/profile'><li className="nav-item bg-warning "style={{width:'50px',height:'50px',borderRadius:'50%'}}>
+      <img style={{objectFit:'contain',width:'100%',height:'100%'}} src="https://m.media-amazon.com/images/I/41jLBhDISxL.jpg" alt="" />
+         </li></Link>
       </ul>:
       <></>  
   }

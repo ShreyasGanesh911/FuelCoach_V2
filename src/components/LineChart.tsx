@@ -21,14 +21,14 @@ export default function LineChart() {
       credentials:'include'
     })
     const data:Data = await responce.json()
-    setDataSet(data.result)
+    setDataSet(data.result.reverse())
   }
   useEffect(()=>{
     getData()
   },[])
   return (
-    <div className='w-50' style={{marginBottom:'10vh',height:'30vh'}}>
-      <Line  className='bg-white' options={{scales:{y:{min:Math.min(...dataSet.map((e)=>e.Weight))-10,max:Math.max(...dataSet.map((e)=>e.Weight))+10}}}}
+    <div className='w-50 rounded-2 font-regular' style={{marginBottom:'10vh',height:'30vh'}}>
+      <Line  className='bg-white font-regular' options={{scales:{y:{min:Math.min(...dataSet.map((e)=>e.Weight))-10,max:Math.max(...dataSet.map((e)=>e.Weight))+10}}}}
       data={{labels:dataSet?.map((e)=>e.Month),datasets:[{label:"Weight",data:dataSet?.map((e)=>e.Weight),backgroundColor:['red'],borderColor:'pink',tension:0.2,fill:false,pointRadius:5}]}}/> 
     </div>
   )

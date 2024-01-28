@@ -31,7 +31,7 @@ weightRoute.post('/add',auth,async(req,res)=>{
 weightRoute.get('/getAllWeightLogs',auth,async(req,res)=>{
     try{
         const User_ID = Number(req.cookies.AuthToken)
-        const [result] = await pool.query(`SELECT Weight,CONCAT(day(Date)," ",monthname(Date)) AS Month FROM weight_log WHERE User_ID = ? ORDER BY Date LIMIT 6;`,[User_ID])
+        const [result] = await pool.query(`SELECT Weight,CONCAT(day(Date)," ",monthname(Date)) AS Month FROM weight_log WHERE User_ID = ? ORDER BY Date DESC LIMIT 6;`,[User_ID])
         res.status(200).json({success:true,result:result})  
     }catch(err){
         res.status(500).json({success:false,result:{message:"internal server error"}})  

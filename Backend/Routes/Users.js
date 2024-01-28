@@ -69,7 +69,7 @@ userRouter.get('/about',auth,async(req,res)=>{
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
     //console.log(`In About ${token}`)
     //const [result] = await pool.query("SELECT Name,BMI,BMR,Age,Height,Weight,Daily_Intake,Gender FROM Users u JOIN User_details ud ON u.User_ID=ud.User_ID WHERE u.User_ID=454578 ;",[token])
-    const [result] = await pool.query("SELECT Name,BMI,Age,Height,Weight,Daily_Intake,Gender FROM Users u,user_details ud WHERE u.User_ID = ud.User_ID AND u.User_ID = ?;",[token])
+    const [result] = await pool.query("SELECT Name,BMI,Age,Height,Weight,Daily_Intake,Gender,Phone,Email FROM Users u,user_details ud WHERE u.User_ID = ud.User_ID AND u.User_ID = ?;",[token])
     //console.log(result)
     res.status(200).json({success:true,message:"Data sent",result:result})
    }catch(err){

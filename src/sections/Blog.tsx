@@ -11,7 +11,7 @@ type DataResponse = {
   publishedAt:string|null,
   source:{id:string|null,name:string|null},
   title:string|null,
-  url:string|null,
+  url:string,
   urlToImage:string,
 
 }
@@ -55,7 +55,7 @@ export default function Blog() {
     
   },[])
   return (
-    <div className='page'>
+    <div className='page font-regular'>
       <h2 className='overflow-y-hidden py-2'>Blogs</h2>
       {loading?<div className='w-100 displayFlex' style={{height:"60vh"}}><HashLoader color='#ffc107' loading={loading} cssOverride={override} size={80} aria-label="Loading Spinner" data-testid="loader"/></div>:
      <>

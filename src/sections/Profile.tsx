@@ -2,28 +2,58 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Auth from "../CustomHooks/Auth"
 import Cookies from 'universal-cookie'
-
+type Result = {
+  Age:number,
+  Name:string,
+  BMI:number|string,
+  BMR:number,
+  Daily_Intake:number,
+  Gender:string,
+  Height:number|string,
+  Weight:string|number,
+  Email:string,
+  Phone:number,
+  // Consumed:number
+}
+type FetchedData={
+  success:boolean,
+  message:String,
+  result:Result[]
+}
 export default function Profile() {
   const cookies = new Cookies()
   const navigate = useNavigate()
   const [edit,setEdit] =useState(false)
   type About = {name:string,email:string,phone:number,age:number,gender:string}
-  const about:About = {name:'shreyas',email:'ShreyasIsNow@gmail.com',phone:9945333584,age:20,gender:'male'}
-  const [info,setInfo] = useState(about)
+  const about:About = {name:'',email:'',phone:0,age:0,gender:''}
+  const [info,setInfo] = useState<About>(about)
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>):void=>{
     let value:string|number = e.target.value
     let name:string = e.target.name
     setInfo({...info,[name]:value})
   }
+  const getUserData = async()=>{
+    const responce = await fetch(`http://localhost:4000/user/about`,{
+      method:"GET",
+      headers:{
+        "Content-Type": "application/json",
+      },
+      credentials: 'include',
+    
+    })
+    const data:FetchedData = await responce.json()
+    setInfo({name:data.result[0].Name,email:data.result[0].Email,phone:data.result[0].Phone,age:data.result[0].Age,gender:data.result[0].Gender})
+  }
   useEffect(()=>{
     if(!cookies.get('MyAuth'))
     navigate('/')
+    getUserData()
   })
   return (
-    <div className='page'>
+    <div className='page font-regular'>
       <h2 className='py-2'>Profile</h2>
       <div className='border' style={{height:'auto',minHeight:'75vh',width:'90%',display:'flex',justifyContent:'center',alignItems:'center',flexDirection:'column'}}>
-      <div style={{height:'250px',width:'250px',borderRadius:'50%'}} className='bg-warning'></div>
+      <div style={{height:'250px',width:'250px',borderRadius:'50%'}} className='bg-warning'><img style={{objectFit:'contain',width:'100%',height:'100%'}} src="https://m.media-amazon.com/images/I/41jLBhDISxL.jpg" alt="" /></div>
       <div className='w-50 '>
             <h6 className="py-1">Name</h6>
             {!edit?
@@ -55,7 +85,7 @@ export default function Profile() {
       <div className='w-50 '>
             <h6 className="py-1">Gender</h6>
             {!edit?
-              <h6 className='mx-4 py-1 w-75 text-warning border-bottom'>{info.gender}</h6>:
+              <h6 className='mx-4 py-1 w-75 text-warning border-bottom'>{info.gender==="M"?'Male':'Female'}</h6>:
               <input className='mx-4 py-1 w-75 text-warning  form-control bg-light' disabled type='text' value={info.gender} name='gender'  />   
           }
           </div>

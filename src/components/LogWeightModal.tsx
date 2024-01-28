@@ -36,7 +36,7 @@ export default function LogWeightModal({show,setShow}:Props) {
         <div className='d-flex' style={{flexDirection:'row-reverse'}}><button className='btn  mx-3 my-3' onClick={()=>setShow(false)}><i className="fa-solid fa-x"></i></button></div>
             <section className='displayFlex my-5'>
             <div className='w-50 displayFlex'>
-            <input required className="form-control w-50 table-font" value={value} onChange={(e)=>setValue(Number(e.target.value))} style={{height:'70px',fontSize:"30px"}} type="number" min={0} max={180} />
+            <input required className="form-control w-50 table-font" step={0.1} value={value} onChange={(e)=>setValue(Number(e.target.value))} style={{height:'70px',fontSize:"30px"}} type="number" min={0} max={180} />
             </div>
             <button className='btn btn-warning table-font' >Add weight</button>
             </section>
