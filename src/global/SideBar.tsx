@@ -21,9 +21,9 @@ const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     {favicon:"fa-solid fa-chart-simple",tag:'Overview',link:'/overview'},
     {favicon:"fa-solid fa-utensils",tag:'Log Food',link:'/LogFood'},
     {favicon:"fa-solid fa-bowl-food",tag:'Recipes',link:'/recipes'},
-    {favicon:"fa-solid fa-newspaper",tag:'Blog',link:'/blogs'},
+    {favicon:"fa-solid fa-newspaper",tag:'Blogs',link:'/blogs'},
     {favicon:"fa-solid fa-user",tag:'Profile',link:'/profile'},
-    {favicon:"fa-solid fa-notes-medical",tag:'Health Log',link:'/profile'},
+    // {favicon:"fa-solid fa-notes-medical",tag:'Health Log',link:'/profile'},  
     {favicon:"fa-solid fa-question",tag:'About',link:'/about'},
     ]
 

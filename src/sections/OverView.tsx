@@ -81,8 +81,8 @@ export default function OverView() {
       </div>
       <section className='line-cover'>
       <LineChart/>
-      <div className='w-25 py-5 mx-5 overflow-y-hidden border rounded-2  displayFlex'>
-        <h3 className='table-font text-center'>Add weight</h3>
+      <div className='w-25 py-5 mx-5 overflow-y-hidden  rounded-2 bg-white displayFlex'>
+        <h3 className=' text-dark text-center'>Add weight</h3>
         <button className='btn btn-warning mx-3 ' onClick={()=>setShow(true)} style={{borderRadius:"50%"}}>+</button>
       </div>
       </section>
