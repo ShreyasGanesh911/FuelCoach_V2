@@ -36,13 +36,6 @@ foodRoute.post('/add',auth,async(req,res)=>{
         res.status(500).send({success:false,Message:"Internal server error"})
     }
 })
-
-
-
-
-
-
-
 // Remove logged food
 foodRoute.post('/remove',auth,async(req,res)=>{
     try{
@@ -73,10 +66,9 @@ foodRoute.post('/search',auth,async(req,res)=>{
            
        })
        const responce = await data.json()
-       console.log(responce.length)
+       
        if(responce.length)
         res.status(200).json({success:true,result:responce})
-       //console.log(responce[0].name)
        else
        res.status(200).json({success:false,message:"no data found"})
     }catch(err){

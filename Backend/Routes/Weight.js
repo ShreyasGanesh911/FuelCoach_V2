@@ -18,7 +18,6 @@ weightRoute.post('/add',auth,async(req,res)=>{
         await pool.query("INSERT INTO weight_log VALUES (?,?,?,?);",[User_ID,weightHash,_date,Weight])
     }
     [result] = await pool.query(`SELECT Height FROM user_details WHERE User_ID =?;`,[User_ID])
-    console.log(result[0].Height)
     await pool.query(`UPDATE user_details set BMI =(?/(?*?))*10000;`,[Weight,result[0].Height,result[0].Height])
     await pool.query(`UPDATE user_details set Weight = ? WHERE User_ID = ?;`,[Weight,User_ID])
      res.status(200).send({success:true,message:"Weight logged!"})
