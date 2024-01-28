@@ -5,12 +5,12 @@ export default function Navbar() {
   const cookies = new Cookies()
   const[auth,setAuth]=useState(false)
   const getToken=():void=>{
-    const token = cookies.get('MyAuth')
-    !token?setAuth(false):setAuth(true)
+    if(cookies.get("MyAuth"))
+      setAuth(true)
   }
   useEffect(()=>{
     getToken()
-  },[])
+  })
   return (
     <>
         <nav className="navbar fixed-top bg-white " style={{opacity:0.9}} >
