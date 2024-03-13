@@ -1,3 +1,31 @@
+# Fuel Coach 
+
+Fuel Coach is a user-friendly diet app that simplifies the journey to a healthier lifestyle.
+<br/>
+Built with MYSQL, Node.js, Express, and React. The design is straightforward, simple to use and responsive.
+### Test Login credentials
+Email: FuelCoachIsNow@gmail.com
+<br/>
+Password: 123456789
+# About the app
+
+<br/>
+
+## Landing page
+<br/>
+![Screenshot (24)](https://github.com/ShreyasGanesh911/FuelCoach_V2/assets/127442299/5239ad67-8874-4f26-a7fd-dbe436ae1a0d)
+
+## Home Page
+<br/>
+![Screenshot (21)](https://github.com/ShreyasGanesh911/DishDash/assets/127442299/e55fad64-b1ef-466b-a610-a9a3e82af426)
+
+## Food search
+<br/>
+![Screenshot (22)](https://github.com/ShreyasGanesh911/DishDash/assets/127442299/c01e46a0-42af-44f4-af6c-bdbfa4662b34)
+
+## Food Log
+![Screenshot (23)](https://github.com/ShreyasGanesh911/DishDash/assets/127442299/dc89c821-e5bd-4eee-b810-a376b27db27a)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
