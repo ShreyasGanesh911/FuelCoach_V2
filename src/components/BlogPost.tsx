@@ -7,7 +7,7 @@ type Props ={
 }
 
 export default function BlogPost(props:Props) {
-  const a = 45
+ 
   const alt:string = 'https://mumbai.jankidevipublicschool.in/Content/Schools/JPS/images/news-default.png'
   return (
     <div className='w-75 border my-5 displayFlex' style={{height:"20vh",borderRadius:'5px'}}>
