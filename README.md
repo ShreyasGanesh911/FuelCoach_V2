@@ -11,7 +11,7 @@ Password: 123456789
 <br/>
 Landing page
 <br/>
-![Landing Page](./public/pictures/Landing%20Page.png)
+![Landing Page](./public/pictures/LandingPage.png)
 
 Home Page
 <br/>
