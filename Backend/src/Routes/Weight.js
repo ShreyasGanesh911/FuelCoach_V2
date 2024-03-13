@@ -1,7 +1,7 @@
 const express = require("express")
 const weightRoute = express.Router()
-const pool = require("../Connection/Connect.js")
-const auth = require("../Auth.js")
+const pool = require("../DB/Connect.js")
+const auth = require('../Middlewares/Auth.js')
 const date = new Date()
 // Push weight to DB , but if it exists dont add, instead update
 weightRoute.post('/add',auth,async(req,res)=>{

@@ -1,9 +1,9 @@
 const express = require('express')
 const userRouter = express.Router()
 const date = new Date()
-const auth = require("../Auth.js")
+const auth = require('../Middlewares/Auth.js')
 const bcrypt = require('bcrypt');
-const pool = require('../Connection/Connect.js')
+const pool = require('../DB/Connect.js')
 userRouter.post("/signup",async(req,res)=>{
     try{
         const {Name,Email,Phone,Password,DOB,Gender,BMI,BMR,Age,Height,Weight,Daily_Intake,Food_pref,Activity_rate,Goal} = req.body;

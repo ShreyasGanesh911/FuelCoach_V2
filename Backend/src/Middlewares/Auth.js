@@ -1,4 +1,4 @@
-const pool = require('./Connection/Connect.js')
+const pool = require('../DB/Connect.js')
 const auth = async(req,res,next)=>{
     const token =  await req.cookies.AuthToken    
     if(token){

@@ -1,5 +1,5 @@
 const express =require("express")
-const auth = require('../Auth.js')
+const auth = require('../Middlewares/Auth.js')
 const calorieRoute = express.Router()
 
 calorieRoute.put("/add",auth,async(req,res)=>{

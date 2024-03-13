@@ -1,6 +1,6 @@
 const express = require("express")
-const auth = require('../Auth.js')
-const pool = require("../Connection/Connect.js")
+const auth = require('../Middlewares/Auth.js')
+const pool = require("../DB/Connect.js")
 const foodRoute = express.Router()
 const date = new Date()
 // get logged food
