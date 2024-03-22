@@ -5,7 +5,6 @@ import OverViewCard from '../components/OverViewCard'
 import FoodTable from '../components/FoodTable';
 import { Link, useNavigate } from 'react-router-dom';
 import LineChart from '../components/LineChart';
-import Auth from '../CustomHooks/Auth';
 import ProgressBar from '../components/ProgressBar';
 import LogWeightModal from '../components/LogWeightModal';
 import Cookies from 'universal-cookie';

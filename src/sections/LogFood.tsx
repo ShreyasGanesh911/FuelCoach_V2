@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import FoodTable from '../components/FoodTable'
 import LogFoodModal from '../components/LogFoodModal'
-import Auth from '../CustomHooks/Auth'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
 export default function LogFood() {

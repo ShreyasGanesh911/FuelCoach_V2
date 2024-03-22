@@ -1,16 +1,9 @@
-import {useState } from "react";
 import {Props} from "../../UserCred";
 import "../../Styles/SignUp.css";
 
 
 export default function StepTwo({cred,setCred,step,setStep}:Props) {
-  type DOB = {
-    month:number,
-    year:number
-  }
-   const dob:DOB = {month:1,year:2000}
      const d = new Date()
-const [userdate,setUserDate] = useState<DOB>(dob)
 const handleDateChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
   setCred({...cred,[e.target.name]:e.target.value})
 

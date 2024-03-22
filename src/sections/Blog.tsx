@@ -1,6 +1,5 @@
 import { useEffect, useState,CSSProperties } from 'react'
 import BlogPost from '../components/BlogPost'
-import Auth from '../CustomHooks/Auth'
 import HashLoader from "react-spinners/HashLoader"
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'

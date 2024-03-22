@@ -11,7 +11,7 @@ export default function SideBar() {
 const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
   e.preventDefault()
   cookie.remove('MyAuth', { path: '/' })
-  const responce = await fetch('http://localhost:4000/clear',{credentials:'include'})
+  await fetch('http://localhost:4000/clear',{credentials:'include'})
   
   localStorage.removeItem('Auth')
   navigate('/')

@@ -27,7 +27,7 @@ export default function StepOne({cred,setCred,step,setStep}:Props) {
   }
   const handleSubmit = async(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
-    if(cred.Phone.toString().length!=12)
+    if(cred.Phone.toString().length!==12)
       return MyToastError("Enter a valid phone number")
     if(await checkUser())
       setStep(step+1) 

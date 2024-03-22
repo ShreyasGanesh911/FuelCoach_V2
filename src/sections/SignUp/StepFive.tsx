@@ -1,8 +1,7 @@
 //import { useState } from 'react'
-import { useEffect, useState,CSSProperties } from "react";
+import {useState,CSSProperties } from "react";
 import {Props} from "../../UserCred";
-import 'react-calendar/dist/Calendar.css';
-import { Link, useNavigate } from 'react-router-dom';
+import {useNavigate } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader"
 type Data = {
   success:boolean,
@@ -20,7 +19,6 @@ export default function StepFive({cred}:Props) {
     await SignUser()
     navigate('/')
   }
-  const[complete,setComplete] = useState<boolean>(false)
   let [loading, setLoading] = useState(false);
   const SignUser =async()=>{
     const responce = await fetch('http://localhost:4000/user/signup',{
