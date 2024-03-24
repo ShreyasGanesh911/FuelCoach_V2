@@ -1,6 +1,6 @@
 const pool = require('../DB/Connect.js')
 const auth = async(req,res,next)=>{
-    const token =  await req.cookies.AuthToken    
+    const token = req.cookies?.AuthToken    
     if(token){
         const [result] = await pool.query("SELECT User_ID FROM Users WHERE User_ID = ?;",[token]) 
         if(result.length)
