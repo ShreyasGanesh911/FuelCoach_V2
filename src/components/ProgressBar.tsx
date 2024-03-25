@@ -31,7 +31,7 @@ export default function ProgressBar() {
   }
   useEffect(()=>{//buildStyles(highPBar)
     getData()
-  })
+  },[])
   return (
     <>
             <div className='bg-white ' style={{width:'15vw',borderRadius:"5%"}}>

@@ -39,7 +39,7 @@ export default function FoodTable() {
   }
   useEffect(()=>{
     getData()
-  })
+  },[])
   return (
     <>{
       table.length===0?

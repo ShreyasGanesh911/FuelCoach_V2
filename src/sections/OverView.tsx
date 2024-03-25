@@ -46,7 +46,9 @@ export default function OverView() {
     }
     else{
       //setGoal(data.result[0]?.Daily_Intake)
+      console.log(data.result)
       myObj.push({name:'Name',data:data.result[0].Name,key:"ABC"},{name:"Calories",data:data.result[0].Daily_Intake,key:"DEF"},{name:"BMI",data:data.result[0].BMI,key:"LMN"},{name:"Weight",data:data.result[0].Weight,key:"HIJ"})
+      myObj.length = 4
       setUserDetails(myObj)
     }    
   
@@ -55,18 +57,18 @@ export default function OverView() {
     name:string, data:string|number , key:string
   }
   const myObj:List[] = []
-  const[userDetails,setUserDetails] = useState<List[]>()
+  const[userDetails,setUserDetails] = useState<List[]>([{name:"",data:"",key:""}])
   useEffect(()=>{
     if(!cookies.get('MyAuth'))
     navigate('/')
     getDetails()
    
-  })
+  },[])
   return (
     <div className='page '>
       {show && <LogWeightModal setShow={setShow} show={show}/>}
       <div className='displayFlex content my-4'>
-    {userDetails?.map(({name,data,key})=>{
+    {userDetails.map(({name,data,key})=>{
           return(<OverViewCard  key={name+key} name={name} data={data}/>)
         })}
       </div>
