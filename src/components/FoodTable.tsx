@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 // import { MyToastSuccess,MyToastError, MyToastWarn } from './Toastbar'
 import { ToastContainer} from 'react-toastify'
 import TableChild from './TableChild'
@@ -22,6 +22,7 @@ export default function FoodTable() {
   const cookie = new Cookies()
   const [table,setTable] = useState<Result[]>([]) 
   let calo = 0,count=0
+  
   const getData = async()=>{
    const responce = await fetch("http://localhost:4000/FoodLog/logged",{
       method:"GET",
@@ -35,11 +36,12 @@ export default function FoodTable() {
       cookie.remove('MyAuth')
       navigate('/')
     }
-    setTable(data?.result)
+    return data?.result
+    //setTable(data?.result)    
   }
   useEffect(()=>{
-    getData()
-  },[])
+    getData().then(setTable)
+  })
   return (
     <>{
       table.length===0?

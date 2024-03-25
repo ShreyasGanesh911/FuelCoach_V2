@@ -1,4 +1,6 @@
 const pool = require('../DB/Connect.js')
+const ErrorHandler = require('../Utils/ErrorHandler.js')
+
 const auth = async(req,res,next)=>{
     const token = req.cookies?.AuthToken    
     if(token){
@@ -6,11 +8,11 @@ const auth = async(req,res,next)=>{
         if(result.length)
             next()
         else
-        res.status(400).json({success:false,message:"Login First"})
+        next(new ErrorHandler('Login First with fake token',401))
     }
         
     else
-    res.status(400).json({success:false,message:"Login First in else"})
+    next(new ErrorHandler('Login First, token does not exist ',401))
     
 }
 module.exports = auth
