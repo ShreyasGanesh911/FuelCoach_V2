@@ -30,6 +30,7 @@ export default function OverView() {
     })
     const data:FetchedData = await responce.json()
     if(!data.success){
+      
       cookies.remove('MyAuth')
       localStorage.removeItem("Auth")
       navigate('/') 
@@ -49,8 +50,8 @@ export default function OverView() {
   const myObj:List[] = []
   const[userDetails,setUserDetails] = useState<List[]>([{name:"",data:"",key:""}])
   useEffect(()=>{
-    if(!cookies.get('MyAuth'))
-    navigate('/')
+    // if(!cookies.get('AuthToken'))
+    // navigate('/')
     getDetails()
    
   },[])

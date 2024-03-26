@@ -1,6 +1,7 @@
 const  pool  = require("../DB/Connect.js");
 const bcrypt = require('bcrypt');
 const date = new Date()
+const jwt = require('jsonwebtoken')
 const asyncHandler = require("../Utils/AsyncHandler.js")
 const ErrorHandler = require("../Utils/ErrorHandler.js")
 const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
@@ -21,9 +22,11 @@ const login = asyncHandler(async(req,res,next)=>{
     const {Email,Password} = req.body;
     const[result] = await pool.query("SELECT Password,User_ID FROM Users WHERE Email = ? ;",[Email])
     if(result.length){
+        
         //{expires: new Date(Date.now()+(90*60*1000)),httpOnly:true,sameSite:"none",secure:true}
         if(bcrypt.compareSync(Password,result[0].Password)){
-            res.cookie('AuthToken',result[0].User_ID,{httpOnly:true,sameSite:"none",secure:true})
+            const AuthToken = jwt.sign({id:result[0].User_ID},"myPassword",{expiresIn:"1d"})
+            res.cookie('AuthToken',AuthToken,{httpOnly:true,sameSite:"none",secure:true})
             res.status(200).send({success:true,message:"logged in",User_ID:result[0].User_ID})
         }
         else
@@ -35,7 +38,7 @@ const login = asyncHandler(async(req,res,next)=>{
 
 
 const about = asyncHandler(async(req,res,next)=>{
-    const token = Number(req.cookies.AuthToken)
+    const token = Number(req.user)
     const [result] = await pool.query("SELECT Name,BMI,Age,Height,Weight,Daily_Intake,Gender,Phone,Email FROM Users u,user_details ud WHERE u.User_ID = ud.User_ID AND u.User_ID = ?;",[token])
     res.status(200).json({success:true,message:"Data sent",result:result})
 })
@@ -52,7 +55,7 @@ const userExists = asyncHandler(async(req,res,next)=>{
 })
 
 const complete = asyncHandler(async(req,res,next)=>{
-    const User_ID = Number(req.cookies.AuthToken)
+    const User_ID = Number(req.user)
     let [result] = await pool.query("SELECT Consumed , Goal FROM calorie_track WHERE User_ID = ? AND Date =?;",[User_ID,_date])
         if(result.length && result[0].Consumed)
          res.status(200).json({success:true,result:[{Consumed:result[0].Consumed,Goal:result[0].Goal}]})

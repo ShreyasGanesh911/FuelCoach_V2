@@ -4,7 +4,7 @@ const { searchFood, addFood, removeFood, loggedFood } = require("../controllers/
 const foodRoute = express.Router()
 
 // get logged food
-foodRoute.get("/logged",loggedFood)
+foodRoute.get("/logged",auth,loggedFood)
 // Log food
 foodRoute.post('/add',auth,addFood)
 // Remove logged food

@@ -6,7 +6,7 @@ const date = new Date()
 
 
 const loggedFood = asyncHandler(async(req,res,next)=>{  
-    const User_ID = req.cookies.AuthToken;
+    const User_ID = Number(req.user);
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
     const [result] = await pool.query("SELECT Calories,date,Tag,FoodName,Qty,FoodHash FROM foodlog WHERE User_ID = ? AND date = ? ORDER BY Time;",[User_ID,_date])
     res.status(200).json({status:true,result:result})
@@ -14,7 +14,7 @@ const loggedFood = asyncHandler(async(req,res,next)=>{
 
 const addFood = asyncHandler(async(req,res,next)=>{
     const{Calories,Tag,Qty,FoodName} = req.body
-    const User_ID = Number(req.cookies.AuthToken);
+    const User_ID = Number(req.user);
     const foodHash = Math.floor(Math.random()*1000000)
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
     await pool.query("INSERT INTO foodlog VALUES (?,?,?,?,?,?,?,?);",[User_ID,foodHash,Calories,_date,Tag,date.getTime(),FoodName,Qty])
@@ -30,7 +30,7 @@ const addFood = asyncHandler(async(req,res,next)=>{
 const removeFood = asyncHandler(async(req,res,next)=>{
     const{FoodHash,Calories} = req.body
     const nFoodHash = Number(FoodHash)
-    const User_ID = req.cookies.AuthToken;  
+    const User_ID = Number(req.user);  
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
     await pool.query("DELETE FROM foodlog WHERE User_ID = ? AND FoodHash = ?;",[User_ID,nFoodHash])
     await pool.query('UPDATE calorie_track SET Consumed = Consumed - ? WHERE User_Id = ? AND Date = ?;',[Calories,User_ID,_date])

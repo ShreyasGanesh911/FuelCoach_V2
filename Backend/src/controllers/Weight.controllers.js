@@ -4,7 +4,7 @@ const asyncHandler = require("../Utils/AsyncHandler")
 
 
 const addWeight = asyncHandler(async(req,res,next)=>{
-    const User_ID = req.cookies.AuthToken
+    const User_ID =  Number(req.user)
     const {Weight} = req.body
     const weightHash = Math.floor(Math.random()*1000000)
     const _date = `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
@@ -25,7 +25,7 @@ const addWeight = asyncHandler(async(req,res,next)=>{
 
 
 const getWeights = asyncHandler(async(req,res,next)=>{
-    const User_ID = Number(req.cookies.AuthToken)
+    const User_ID = Number(req.user)
         const [result] = await pool.query(`SELECT Weight,CONCAT(day(Date)," ",monthname(Date)) AS Month FROM weight_log WHERE User_ID = ? ORDER BY Date DESC LIMIT 6;`,[User_ID])
         res.status(200).json({success:true,result:result})  
 })
