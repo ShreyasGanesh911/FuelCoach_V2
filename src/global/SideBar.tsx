@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import{useState } from 'react'
 import { Sidebar, Menu, MenuItem} from 'react-pro-sidebar';
 import {NavLink,Outlet, useNavigate} from 'react-router-dom';
-
+import { sideBarMenu } from '../Types';
 import '../Styles/Sidebar.css'
 import Cookies from 'universal-cookie';
 export default function SideBar() {
@@ -17,15 +17,7 @@ const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
   navigate('/')
 }
   type Menuitem = {favicon:string,tag:string,link:string}
-  const menuitems:Menuitem[] = [
-    {favicon:"fa-solid fa-chart-simple",tag:'Overview',link:'/overview'},
-    {favicon:"fa-solid fa-utensils",tag:'Log Food',link:'/LogFood'},
-    {favicon:"fa-solid fa-bowl-food",tag:'Recipes',link:'/recipes'},
-    {favicon:"fa-solid fa-newspaper",tag:'Blogs',link:'/blogs'},
-    {favicon:"fa-solid fa-user",tag:'Profile',link:'/profile'},
-    // {favicon:"fa-solid fa-notes-medical",tag:'Health Log',link:'/profile'},  
-    {favicon:"fa-solid fa-question",tag:'About',link:'/about'},
-    ]
+  const menuitems:Menuitem[] = sideBarMenu
 
   const [close,setClose] = useState(false)
   const hide:string = 'visually-hidden';

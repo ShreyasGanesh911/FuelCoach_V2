@@ -3,17 +3,7 @@ import BlogPost from '../components/BlogPost'
 import HashLoader from "react-spinners/HashLoader"
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
-type DataResponse = {
-  author:string|null,
-  content:string|null,
-  description:string|null,
-  publishedAt:string|null,
-  source:{id:string|null,name:string|null},
-  title:string|null,
-  url:string,
-  urlToImage:string,
-
-}
+import { BlogResponse } from '../Types'
 const override: CSSProperties = {
   display: "block",
   margin: "0 auto",
@@ -60,7 +50,7 @@ export default function Blog() {
      <>
      {
       view?(
-      blog.map((e:DataResponse)=>{
+      blog.map((e:BlogResponse)=>{
         return(
           <BlogPost title={e.title} description={e.description} img={e.urlToImage} key={e.url} newsUrl={e.url}/>
         )

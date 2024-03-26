@@ -8,25 +8,15 @@ import LineChart from '../components/LineChart';
 import ProgressBar from '../components/ProgressBar';
 import LogWeightModal from '../components/LogWeightModal';
 import Cookies from 'universal-cookie';
-
+import { UserResult } from '../Types';
 export default function OverView() {
   const cookies = new Cookies()
   const navigate = useNavigate()
-  type Result = {
-    Age:number,
-    Name:string,
-    BMI:number|string,
-    BMR:number,
-    Daily_Intake:number,
-    Gender:string,
-    Height:number|string,
-    Weight:string|number,
-    // Consumed:number
-  }
+
   type FetchedData={
     success:boolean,
     message:String,
-    result:Result[]
+    result:UserResult[]
   }
   const[show,setShow] = useState<boolean>(false)
   const getDetails = async()=>{

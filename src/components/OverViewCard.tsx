@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import React from 'react'
+
 type Props = {name:string,data:string|number}
 export default function OverViewCard(props:Props) {
   return (

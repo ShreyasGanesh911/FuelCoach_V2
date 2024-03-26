@@ -29,7 +29,7 @@ export default function ProgressBar() {
         
     }
   }
-  useEffect(()=>{//buildStyles(highPBar)
+  useEffect(()=>{
     getData()
   },[])
   return (

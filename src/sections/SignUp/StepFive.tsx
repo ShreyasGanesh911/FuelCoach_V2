@@ -1,6 +1,6 @@
 //import { useState } from 'react'
 import {useState,CSSProperties } from "react";
-import {Props} from "../../UserCred";
+import {Props} from "../../Types/UserCred";
 import {useNavigate } from 'react-router-dom';
 import HashLoader from "react-spinners/HashLoader"
 type Data = {

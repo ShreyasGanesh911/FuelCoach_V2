@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {Form,Props} from "../../UserCred";
+import {Form,Props} from "../../Types/UserCred";
 import "../../Styles/SignUp.css";
 import { MyToastError } from "../../components/Toastbar";
 type Data = {

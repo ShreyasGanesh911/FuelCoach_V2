@@ -1,45 +1,20 @@
 import React, { useState, Dispatch,SetStateAction, useEffect,CSSProperties } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import  "../Styles/LogFood.css"
 import getdata from '../CustomHooks/getFoodData';
-import {MyToastSuccess,MyToastWarn} from "../components/Toastbar"
+import {MyToastWarn} from "../components/Toastbar"
 import HashLoader from "react-spinners/HashLoader"
+import { Responce, Food , Data } from '../Types';
 type Props = {
     setShow: Dispatch<SetStateAction<boolean>>;
 }
-interface Responce{
-    calories: number,
-    carbohydrates_total_g?: number,
-    cholesterol_mg?: number,
-    fat_saturated_g?: number,
-    fat_total_g?: number,
-    fiber_g?: number,
-    name?: string,
-    potassium_mg?: number,
-    protein_g?: number,
-    serving_size_g?: number,
-    sodium_mg?:number,
-    sugar_g?: number,
-    }
-interface Food{
-    Calories:number,
-    Tag:string,
-    FoodName:string,
-    Qty:number
-}
-interface Data{
-    success:boolean,
-    
-    result:Responce[]
-}
+
 const override: CSSProperties = {
     display: "block",
     margin: "0 auto",
     borderColor: "red",
   };
-
-
 
 export default function LogFoodModal({setShow}:Props) {
     let [loading, setLoading] = useState(false);

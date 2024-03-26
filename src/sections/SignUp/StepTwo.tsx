@@ -1,4 +1,4 @@
-import {Props} from "../../UserCred";
+import {Props} from "../../Types/UserCred";
 import "../../Styles/SignUp.css";
 
 

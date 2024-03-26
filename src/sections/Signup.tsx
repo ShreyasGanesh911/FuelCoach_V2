@@ -6,9 +6,11 @@ import StepTwo from './SignUp/StepTwo'
 import StepFour from './SignUp/StepFour'
 import { ToastContainer } from 'react-toastify'
 import StepFive from './SignUp/StepFive'
-import { FormLayout } from '../UserCred'
+import { FormLayout } from '../Types/UserCred'
+import { form } from '../Types'
+
 export default function Signup() {
-  const userCred:FormLayout = {Name:'',Email:'',Phone:91,Password:'',Gender:'',Weight:35,Height:180,BMI:0,BMR:0,Age:0,Daily_Intake:0,Food_pref:1,Activity_rate:1.200,Goal:0,DOB:'',month:1,year:2000}
+  const userCred:FormLayout = form
   const[step,setStep] = useState(1)
   const[cred,setCred] = useState<FormLayout>(userCred)
   return (

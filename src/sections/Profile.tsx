@@ -1,23 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'universal-cookie'
-type Result = {
-  Age:number,
-  Name:string,
-  BMI:number|string,
-  BMR:number,
-  Daily_Intake:number,
-  Gender:string,
-  Height:number|string,
-  Weight:string|number,
-  Email:string,
-  Phone:number,
-  // Consumed:number
-}
+import { ProfileResult } from '../Types'
 type FetchedData={
   success:boolean,
   message:String,
-  result:Result[]
+  result:ProfileResult[]
 }
 export default function Profile() {
   const cookies = new Cookies()

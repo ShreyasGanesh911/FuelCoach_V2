@@ -4,23 +4,16 @@ import { ToastContainer} from 'react-toastify'
 import TableChild from './TableChild'
 import Cookies from 'universal-cookie'
 import { useNavigate } from 'react-router-dom'
-type Result={
-  Calories:number,
-  date:string,
-  Tag:string,
-  FoodName:string,
-  Qty:number,
-  FoodHash:number
-}
+import { TableResult } from '../Types'
 type Data = {
   status:boolean,
-  result:Result[]
+  result:TableResult[]
 }
 
 export default function FoodTable() {
   const navigate = useNavigate()
   const cookie = new Cookies()
-  const [table,setTable] = useState<Result[]>([]) 
+  const [table,setTable] = useState<TableResult[]>([]) 
   let calo = 0,count=0
   
   const getData = async()=>{

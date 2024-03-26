@@ -1,20 +1,13 @@
 import { ToastContainer } from "react-toastify"
 import { MyToastSuccess, MyToastWarn } from "./Toastbar"
 import { useState } from "react"
+import { TableProps } from "../Types"
 
-type Props ={
-    Calories:number,
-  Tag:string,
-  FoodName:string,
-  Qty:number,
-  FoodHash:number,
-  count:number
-}
 type Value ={
   FoodHash:number,
   Calories:number
 }
-export default function TableChild(props:Props) {
+export default function TableChild(props:TableProps) {
     const [confirm,setConfirm] = useState<boolean>(false)
     const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
