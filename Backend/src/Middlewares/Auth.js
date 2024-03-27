@@ -1,3 +1,4 @@
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const pool = require('../DB/Connect.js')
 const ErrorHandler = require('../Utils/ErrorHandler.js')
@@ -5,7 +6,7 @@ const ErrorHandler = require('../Utils/ErrorHandler.js')
 const auth = async(req,res,next)=>{
     const token = req.cookies?.AuthToken    
     if(token){
-        jwt.verify(token,"myPassword",async(err,user)=>{
+        jwt.verify(token,process.env.JWTKEY,async(err,user)=>{
             if(err){
                 res.clearCookie('AuthToken')
                 return next(new ErrorHandler("Token doesn't exists",401))

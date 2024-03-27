@@ -1,6 +1,7 @@
 const  pool  = require("../DB/Connect.js");
 const bcrypt = require('bcrypt');
 const date = new Date()
+require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const asyncHandler = require("../Utils/AsyncHandler.js")
 const ErrorHandler = require("../Utils/ErrorHandler.js")
@@ -25,7 +26,7 @@ const login = asyncHandler(async(req,res,next)=>{
         
         //{expires: new Date(Date.now()+(90*60*1000)),httpOnly:true,sameSite:"none",secure:true}
         if(bcrypt.compareSync(Password,result[0].Password)){
-            const AuthToken = jwt.sign({id:result[0].User_ID},"myPassword",{expiresIn:"1d"})
+            const AuthToken = jwt.sign({id:result[0].User_ID},process.env.JWTKEY,{expiresIn:"1d"})
             res.cookie('AuthToken',AuthToken,{httpOnly:true,sameSite:"none",secure:true})
             res.status(200).send({success:true,message:"logged in",User_ID:result[0].User_ID})
         }
