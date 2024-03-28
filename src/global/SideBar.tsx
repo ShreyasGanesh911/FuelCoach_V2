@@ -8,10 +8,10 @@ import Cookies from 'universal-cookie';
 export default function SideBar() {
   const cookie = new Cookies()
   const navigate = useNavigate()
-const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
+  const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
   e.preventDefault()
   cookie.remove('MyAuth', { path: '/' })
-  await fetch('http://localhost:4000/clear',{credentials:'include'})
+  await fetch('http://localhost:4000/logout',{credentials:'include'})
   
   localStorage.removeItem('Auth')
   navigate('/')
@@ -22,7 +22,7 @@ const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
   const [close,setClose] = useState(false)
   const hide:string = 'visually-hidden';
   const show:string = '';
-//React.MouseEvent<HTMLButtonElement, MouseEvent>
+
   return (
     <>
 <Sidebar id='side'  backgroundColor='#ffffff'  transitionDuration={800} collapsed={close} collapsedWidth='6vw' width='15vw' className='text-black position-fixed my-5' >

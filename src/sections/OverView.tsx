@@ -50,8 +50,8 @@ export default function OverView() {
   const myObj:List[] = []
   const[userDetails,setUserDetails] = useState<List[]>([{name:"",data:"",key:""}])
   useEffect(()=>{
-    // if(!cookies.get('AuthToken'))
-    // navigate('/')
+    if(!cookies.get('AuthToken'))
+    navigate('/')
     getDetails()
    
   },[])

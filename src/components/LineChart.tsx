@@ -1,6 +1,10 @@
 import { Chart as ChartJS,BarElement,Tooltip,Legend,CategoryScale,LinearScale,PointElement,LineElement} from 'chart.js'
 import { useEffect, useState } from 'react'
 import { Line } from 'react-chartjs-2'
+import {useNavigate } from 'react-router-dom';
+import Cookies from 'universal-cookie';
+const cookies = new Cookies()
+
 ChartJS.register(BarElement,Tooltip,Legend,CategoryScale,LinearScale,PointElement,LineElement)
 type Result = {
   Weight:number,
@@ -11,6 +15,7 @@ type Data = {
   result:Result[]
 }
 export default function LineChart() {
+  const navigate = useNavigate()
   const[dataSet,setDataSet] = useState<Result[]>([{Weight:70,Month:"Jan"}])
   const getData = async()=>{
     const responce = await fetch('http://localhost:4000/weight/getAllWeightLogs',{
@@ -24,6 +29,8 @@ export default function LineChart() {
     setDataSet(data.result.reverse())
   }
   useEffect(()=>{
+    if(!cookies.get('AuthToken'))
+    navigate('/')
     getData()
   },[])
   return (

@@ -16,13 +16,11 @@ app.use(express.json());
 app.use("/user", userRouter);
 app.use('/weight',weightRoute)
 app.use('/FoodLog',foodRoute)
-//app.use(errorHandler)
-app.get('/clear',(req,res)=>{
+
+//Logout
+app.get('/logout',(req,res)=>{
   res.clearCookie('AuthToken')
-  res.status(200).json({success:true})
-})
-app.get("/check",(req,res,next)=>{
-  next(new ErrorHandler("Test",401))
+  res.status(200).json({success:true,message:"Logged out"})
 })
 app.use(APIError)
 
