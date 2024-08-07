@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useCallback, useEffect, useState } from 'react'
 // import { MyToastSuccess,MyToastError, MyToastWarn } from './Toastbar'
 import { ToastContainer} from 'react-toastify'
 import TableChild from './TableChild'
@@ -29,12 +29,14 @@ export default function FoodTable() {
       cookie.remove('MyAuth')
       navigate('/')
     }
-    return data?.result
-    //setTable(data?.result)    
+    setTable(data?.result)
+    //return data?.result
+       
   }
   useEffect(()=>{
-    getData().then(setTable)
-  })
+    //getData().then(setTable)
+    getData()
+  },[setTable])
   return (
     <>{
       table.length===0?

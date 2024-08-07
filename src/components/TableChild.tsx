@@ -2,12 +2,14 @@ import { ToastContainer } from "react-toastify"
 import { MyToastSuccess, MyToastWarn } from "./Toastbar"
 import { useState } from "react"
 import { TableProps } from "../Types"
+import { useNavigate } from "react-router-dom"
 
 type Value ={
   FoodHash:number,
   Calories:number
 }
 export default function TableChild(props:TableProps) {
+  const navigate = useNavigate()
     const [confirm,setConfirm] = useState<boolean>(false)
     const handleClick = async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
         e.preventDefault()
@@ -16,6 +18,7 @@ export default function TableChild(props:TableProps) {
         console.log(tablevalue.FoodHash,tablevalue.Calories)
         const responce = await fetch('http://localhost:4000/FoodLog/remove',{
           method:"POST",
+          mode:"cors",
           headers:{
             "Content-Type": "application/json",
           },
@@ -23,8 +26,11 @@ export default function TableChild(props:TableProps) {
           body:JSON.stringify({FoodHash:tablevalue.FoodHash,Calories:tablevalue.Calories})
         })
         const data = await responce.json()
-        if(data.success)
+        if(data.success){
           MyToastSuccess(data.Message)
+          navigate('/LogFood')
+        }
+          
         else
         MyToastWarn("Oops something went wrong")
   

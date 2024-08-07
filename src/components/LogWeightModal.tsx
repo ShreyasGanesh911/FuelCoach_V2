@@ -17,6 +17,7 @@ export default function LogWeightModal({show,setShow}:Props) {
         return MyToastError('Enter your weight')
         const responce = await fetch('http://localhost:4000/weight/add',{
             method:'POST',
+            mode:"cors",
             headers:{
                 "Content-Type": "application/json",
             },

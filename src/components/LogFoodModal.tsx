@@ -6,6 +6,8 @@ import getdata from '../CustomHooks/getFoodData';
 import {MyToastWarn} from "../components/Toastbar"
 import HashLoader from "react-spinners/HashLoader"
 import { Responce, Food , Data } from '../Types';
+import { useNavigate } from 'react-router-dom';
+
 type Props = {
     setShow: Dispatch<SetStateAction<boolean>>;
 }
@@ -17,6 +19,7 @@ const override: CSSProperties = {
   };
 
 export default function LogFoodModal({setShow}:Props) {
+    const navigate = useNavigate()
     let [loading, setLoading] = useState(false);
   let [color, setColor] = useState("#ffc107");
      let userFood:Food={
@@ -38,6 +41,7 @@ export default function LogFoodModal({setShow}:Props) {
         //------------------------------------------------------------------------------------------------------------------------
        const res:Data = await getdata(`1  ${log.FoodName}`)
        console.log(res)
+       
        if(!res.success){
         setResult(false)
         setLoading(false)
@@ -51,6 +55,7 @@ export default function LogFoodModal({setShow}:Props) {
         setArray(res.result)
         setResult(true)
         setLoading(false)
+        navigate('/LogFood')
        }   
     }
 

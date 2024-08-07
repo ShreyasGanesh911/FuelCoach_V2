@@ -10,7 +10,10 @@ const navigate = useNavigate()
   })
   return (
     <div className='page'>
-      recipes
+      <h2>Recipes</h2>
+      <div className='displayFlex'>
+            Coming soon....
+      </div>
     </div>
   )
 }

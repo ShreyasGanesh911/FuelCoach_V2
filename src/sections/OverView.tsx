@@ -22,6 +22,7 @@ export default function OverView() {
   const getDetails = async()=>{
     const responce = await fetch(`http://localhost:4000/user/about`,{
       method:"GET",
+      mode:'cors',
       headers:{
         "Content-Type": "application/json",
       },
@@ -31,7 +32,7 @@ export default function OverView() {
     const data:FetchedData = await responce.json()
     if(!data.success){
       
-      cookies.remove('MyAuth')
+      cookies.remove('AuthToken')
       localStorage.removeItem("Auth")
       navigate('/') 
     }
@@ -50,8 +51,6 @@ export default function OverView() {
   const myObj:List[] = []
   const[userDetails,setUserDetails] = useState<List[]>([{name:"",data:"",key:""}])
   useEffect(()=>{
-    if(!cookies.get('AuthToken'))
-    navigate('/')
     getDetails()
    
   },[])
@@ -65,7 +64,7 @@ export default function OverView() {
       </div>
       <div className='displayFlex'  style={{justifyContent:'space-between',marginTop:'5vh',marginBottom:'5vh'}}>
         <div className='w-50 mx-5' style={{height:'30vh',borderRadius:'5px'}}>
-          <Link to='/LogFood' className='nav-link'><FoodTable/></Link>         
+          <Link to='/LogFood' className='nav-link'><FoodTable /></Link>         
         </div>
         <ProgressBar/>
     <div>
@@ -74,8 +73,8 @@ export default function OverView() {
       <section className='line-cover'>
       <LineChart/>
       <div className='w-25 py-5 mx-5 overflow-y-hidden  rounded-2 bg-white displayFlex'>
-        <h3 className=' text-dark text-center'>Add weight</h3>
-        <button className='btn btn-warning mx-3 ' onClick={()=>setShow(true)} style={{borderRadius:"50%"}}>+</button>
+        <h3 className=' text-dark text-center py-1'>Add weight</h3>
+        <button className='btn btn-warning mx-3 ' onClick={()=>setShow(true)} style={{borderRadius:"50%"}}><i className="fa-solid fa-plus"></i></button>
       </div>
       </section>
 

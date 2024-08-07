@@ -20,6 +20,8 @@ export default function LineChart() {
   const getData = async()=>{
     const responce = await fetch('http://localhost:4000/weight/getAllWeightLogs',{
       method:"GET",
+      mode:"cors",
+      
       headers:{
         "Content-Type": "application/json",
       },
@@ -29,8 +31,8 @@ export default function LineChart() {
     setDataSet(data.result.reverse())
   }
   useEffect(()=>{
-    if(!cookies.get('AuthToken'))
-    navigate('/')
+    // if(!cookies.get('AuthToken'))
+    // navigate('/')
     getData()
   },[])
   return (

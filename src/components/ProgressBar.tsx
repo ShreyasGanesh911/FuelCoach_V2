@@ -18,6 +18,7 @@ export default function ProgressBar() {
   const getData = async()=>{
     const responce = await fetch("http://localhost:4000/user/completed",{
         method:"GET",
+        mode:"cors",
         headers:{
             "Content-Type": "application/json",
         },
