@@ -9,13 +9,15 @@ Email: FuelCoachIsNow@gmail.com
 Password: 123456789
 # About the app
 <br/>
+
 Landing page
 <br/>
+
 ![Landing Page](./public/pictures/LandingPage.png)
 
 Home Page
 <br/>
-![Home Page](./public/pictures/HomePage.png)
+![Home Page](./public/pictures/HomeNew.png)
 
 Food search
 <br/>
@@ -24,5 +26,13 @@ Food search
 Food Log
 ![Food Log](./public/pictures/Food%20Log.png)
 
+Home 
+![Food Log](./public/pictures/HomePage.png)
+
+Blogs
+![Food Log](./public/pictures/Blog.png)
+
+About
+![Food Log](./public/pictures/About.png)
 # Backend
  [Click here: ](./Backend/readme.md)
